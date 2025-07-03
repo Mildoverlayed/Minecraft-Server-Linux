@@ -13,20 +13,19 @@ This is the server side manager that you would put on a raspberry Pi that allows
 
 ## File System
 
-PI~
-|
-+-- PI stuff
-+-- Minecraft-Server-PI
-    |
-    +-- LICENSE
-    +-- server.py
-    +-- instances
-        |
-        +-- worlds
-        +-- worlds
-        +-- worlds
-        +-- worlds
-
+PI~\
+|\
++-- PI stuff\
++-- Minecraft-Server-PI\
+&emsp;&emsp;|\
+&emsp;&emsp;+-- LICENSE\
+&emsp;&emsp;+-- server.py\
+&emsp;&emsp;+-- instances\
+&emsp;&emsp;&emsp;&emsp;|\
+&emsp;&emsp;&emsp;&emsp;+-- worlds\
+&emsp;&emsp;&emsp;&emsp;+-- worlds\
+&emsp;&emsp;&emsp;&emsp;+-- worlds\
+&emsp;&emsp;&emsp;&emsp;+-- worlds
 
 
 ## Setup
