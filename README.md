@@ -31,5 +31,5 @@ PI~\
 ## Setup
 imports
 ``` 
-sudo apt install python3 $$ sudo sudo apt-get install python3-pip
+sudo apt install python3 && sudo sudo apt-get install python3-pip
 ```
