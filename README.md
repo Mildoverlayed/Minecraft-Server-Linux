@@ -29,7 +29,12 @@ PI~\
 
 
 ## Setup
-imports
+```
+sudo apt update
+```
+```
+sudo apt upgrade
+```
 ``` 
-sudo apt install python3 && sudo sudo apt-get install python3-pip
+sudo apt install python3 && sudo sudo apt-get install python3-pip && sudo apt install tmux
 ```
