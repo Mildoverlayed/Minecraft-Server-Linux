@@ -9,3 +9,20 @@ This is the server side manager that you would put on a raspberry Pi that allows
 
 ## Roadmap
 * shut down server if to hot
+
+
+## File System
+
+PI~
+|
++-- PI stuff
++-- Minecraft-Server-PI
+    |
+    +-- LICENSE
+    +-- server.py
+    +-- instances
+        |
+        +-- worlds
+        +-- worlds
+        +-- worlds
+        +-- worlds
