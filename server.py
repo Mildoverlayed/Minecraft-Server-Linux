@@ -55,7 +55,7 @@ while True:
         break
     except ValueError:
         ClearScreen()
-        print("Invalid input. Please enter a number.")
+        print("Invalid input. Please enter a number. \n \n")
         print("Minecraft Server Manager")
         print("choose an option:")
         print("1. Create Instance")
