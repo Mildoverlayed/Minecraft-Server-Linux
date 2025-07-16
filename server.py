@@ -1,5 +1,6 @@
 #import necessary modules
 import os
+import json
 
 
 
@@ -25,6 +26,11 @@ def ClearScreen():
 # Start of the script
 ClearScreen()
 
+with open('config.json', 'r') as openfile:
+
+    json_object = json.load(openfile)
+    print(json_object)
+
 print("Minecraft Server Manager")
 print("choose an option:")
 print("1. Create Instance")
@@ -38,23 +44,45 @@ if input_choice == 1:
     # Create Instance
     ClearScreen()
     pass
+
 elif input_choice == 2:
     # Start Instance
     ClearScreen()
+    ListInstances()
+    instance_name = input("Enter the instance name to start: ")
+    if instance_name:
+        instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
+        if os.path.exists(instance_path):
+            print("Use Global Max Ram amount %a (Y/N): ", Maxram )
+
+
+
+            print(f"Starting instance: {instance_name}")
+
+
+        else:
+            print(f"Instance '{instance_name}' does not exist.")
+    else:
+        print("No instance name provided.")
     pass
+
 elif input_choice == 3:
     # Delete Instance
     ClearScreen()
     pass
+
 elif input_choice == 4:
     # Configure Instance
     ClearScreen()
     ListInstances()
+    instance_name = input("Enter the instance name to configure: ")
     pass
+
 elif input_choice == 5:
     # Global Settings
     ClearScreen()
     pass
+
 else :
     print("Invalid choice. Please try again.")
 

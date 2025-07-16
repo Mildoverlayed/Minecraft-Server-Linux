@@ -1,4 +1,5 @@
 {
-    "setup": true
-
+    "SETUP": true,
+    "MINRAM": "1024M",
+    "MAXRAM": "2048M"
 }

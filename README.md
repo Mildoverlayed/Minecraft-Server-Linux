@@ -3,7 +3,7 @@ I know this has already been done and is most likely better but I wanted my take
 And this can do modded while automaticly changing and installing the needed java version since some better mods are made for older versions
  
 For an example Server Go to https://github.com/Mildoverlayed/Example-Minecraft-Server.git or install during setup process
-
+To install more minecraft instances is simple 
 
 
 
