@@ -36,20 +36,24 @@ input_choice = int(input())
 
 if input_choice == 1:
     # Create Instance
-
+    ClearScreen()
     pass
 elif input_choice == 2:
     # Start Instance
+    ClearScreen()
     pass
 elif input_choice == 3:
     # Delete Instance
+    ClearScreen()
     pass
 elif input_choice == 4:
     # Configure Instance
+    ClearScreen
     ListInstances()
     pass
 elif input_choice == 5:
     # Global Settings
+    ClearScreen()
     pass
 else :
     print("Invalid choice. Please try again.")
