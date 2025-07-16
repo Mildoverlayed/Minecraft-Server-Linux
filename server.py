@@ -16,10 +16,14 @@ def ListInstances():
     else:
         print("No instances found. Please create an instance folder in the Instances directory.")
 
-
+def ClearScreen():
+    """
+    Clear the console screen.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Start of the script
-os.system('cls' if os.name == 'nt' else 'clear')
+ClearScreen()
 
 print("Minecraft Server Manager")
 print("choose an option:")
@@ -32,6 +36,7 @@ input_choice = int(input())
 
 if input_choice == 1:
     # Create Instance
+
     pass
 elif input_choice == 2:
     # Start Instance
