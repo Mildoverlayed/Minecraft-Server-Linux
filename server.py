@@ -1,6 +1,7 @@
 #import necessary modules
 import os
 import json
+from turtle import setup
 
 
 
@@ -29,7 +30,13 @@ ClearScreen()
 with open('config.json', 'r') as openfile:
 
     json_object = json.load(openfile)
-    print(json_object)
+    SETUP = json_object['SETUP']
+    MINRAM = json_object['MINRAM']
+    MAXRAM = json_object['MAXRAM']
+
+if not SETUP:
+    print("Please run the setup first.")
+    exit()
 
 print("Minecraft Server Manager")
 print("choose an option:")
@@ -53,7 +60,7 @@ elif input_choice == 2:
     if instance_name:
         instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
         if os.path.exists(instance_path):
-            print("Use Global Max Ram amount %a (Y/N): ", Maxram )
+            print("Use Global Max Ram amount %a (Y/N): ", MAXRAM )
 
 
 
