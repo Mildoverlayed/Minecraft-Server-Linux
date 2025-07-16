@@ -22,13 +22,8 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
 
-elif [ "$OS" = "Fedora" ]; then
-    echo "fed"
-elif [ "$OS" = "Arch Linux" ]; then
-    echo "arch"
-elif [ "$OS" = "Manjaro Linux" ]; then
-    echo "manjaro"
 else
     echo "Unsupported OS: $OS"
+    echo "Please use Debian or Ubuntu." 
     exit 1
 fi
