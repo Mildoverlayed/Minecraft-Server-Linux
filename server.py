@@ -54,7 +54,15 @@ while True:
         input_choice = int(input())
         break
     except ValueError:
+        ClearScreen()
         print("Invalid input. Please enter a number.")
+        print("Minecraft Server Manager")
+        print("choose an option:")
+        print("1. Create Instance")
+        print("2. Start Instance")
+        print("3. Delete Instance")
+        print("4. Configure Instance")
+        print("5. Global Settings")
         continue
 
 if input_choice == 1:
