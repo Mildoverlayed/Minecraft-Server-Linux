@@ -52,9 +52,10 @@ print("5. Global Settings")
 while True:
     try:
         input_choice = int(input())
+        break
     except ValueError:
         print("Invalid input. Please enter a number.")
-        break
+        continue
 
 if input_choice == 1:
     # Create Instance
