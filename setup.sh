@@ -48,3 +48,7 @@ else
     echo "Thank you for using My Minecraft Server Manager!"
     exit 1
 fi
+
+jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
+
+exit 0
