@@ -29,3 +29,17 @@ else
     echo "Please use Debian or Ubuntu." 
     exit 1
 fi
+
+clear
+echo "Java installation complete."
+echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server (Y/n)"
+read -r install_test_server
+cd Instances 
+if [ "$install_test_server" = "Y" ] then
+    echo "Installing test server..."
+    git clone https://github.com/Mildoverlayed/Example-Minecraft-Server.git
+    echo "Test server installed in Instances/Example-Minecraft-Server"
+    echo "To run the server, run server.py and follow the instructions."
+else
+    exit 1
+fi
