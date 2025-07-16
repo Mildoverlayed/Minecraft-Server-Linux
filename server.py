@@ -1,7 +1,6 @@
 #import necessary modules
 import os
 import json
-from turtle import setup
 
 
 
