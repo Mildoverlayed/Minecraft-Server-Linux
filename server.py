@@ -48,7 +48,7 @@ elif input_choice == 3:
     pass
 elif input_choice == 4:
     # Configure Instance
-    ClearScreen
+    ClearScreen()
     ListInstances()
     pass
 elif input_choice == 5:
