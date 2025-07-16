@@ -31,14 +31,20 @@ print("5. Global Settings")
 input_choice = int(input())
 
 if input_choice == 1:
+    # Create Instance
     pass
 elif input_choice == 2:
+    # Start Instance
     pass
 elif input_choice == 3:
+    # Delete Instance
     pass
 elif input_choice == 4:
+    # Configure Instance
+    ListInstances()
     pass
 elif input_choice == 5:
+    # Global Settings
     pass
 else :
     print("Invalid choice. Please try again.")
