@@ -1,4 +1,4 @@
 import os
 
-os.chdir("instances")
+os.chdir("Instances")
 print(os.listdir())
