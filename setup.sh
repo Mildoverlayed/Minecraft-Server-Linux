@@ -8,10 +8,10 @@ echo "[4.] Flatpak"
 echo "[5.] Pacman"
 read package_manager
 if [ "$package_manager" -eq 1 ]; then
-    apt update && apt upgrade -y
-    apt install openjdk-8-jre-headless -y
-    apt install openjdk-17-jre-headless -y
-    apt install openjdk-21-jre-headless -y
+    apt update && apt upgrade -y &&  apt-get update
+    apt-get install openjdk-8-jre-headless -y
+    apt-get install openjdk-17-jre-headless -y
+    apt-get install openjdk-21-jre-headless -y
 
 
 
