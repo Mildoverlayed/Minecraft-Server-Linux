@@ -32,6 +32,8 @@ else
     exit 1
 fi
 
+jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
+
 clear
 echo "Java installation complete."
 echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server (Y/n)"
@@ -49,6 +51,5 @@ else
     exit 1
 fi
 
-jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
 
 exit 0
