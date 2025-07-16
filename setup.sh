@@ -36,9 +36,9 @@ clear
 echo "Java installation complete."
 echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server (Y/n)"
 read -r install_test_server
-cd Instances 
 if [[ "$install_test_server" = "Y" || "$install_test_server" = "y" ]]; then
     echo "Installing test server..."
+    cd Instances 
     git clone https://github.com/Mildoverlayed/Example-Minecraft-Server.git
     echo "Test server installed in Instances/Example-Minecraft-Server"
     echo "To run the server, run server.py and follow the instructions."
