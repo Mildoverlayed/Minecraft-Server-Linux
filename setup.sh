@@ -3,7 +3,7 @@ echo "Detected OS: $OS"
 
 if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt update && sudo apt install -y
-
+    sudo apt-get -q update
 elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt install openjdk-8-jre-headless -y
