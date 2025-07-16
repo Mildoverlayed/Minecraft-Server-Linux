@@ -1,40 +1,5 @@
-# Minecraft Pi
- A server manager for a Raspberry Pi 5
-This is the server side manager that you would put on a raspberry Pi that allows you to have multible modpacks and world on those modpacks BUT do to me not want to break your Pi only allowing 1 instance to run at 1 time in future might have a way to do multible
-
-## What it can do
-* open and host a minecraft server moded or not
-* show temp of cpu
+## curent supported Disros 
+* Debian GNU/Linux
 
 
-## Roadmap
-* shut down server if to hot
-
-
-## File System
-
-PI~\
-|\
-+-- PI stuff\
-+-- Minecraft-Server-PI\
-&emsp;&emsp;|\
-&emsp;&emsp;+-- LICENSE\
-&emsp;&emsp;+-- server.py\
-&emsp;&emsp;+-- instances\
-&emsp;&emsp;&emsp;&emsp;|\
-&emsp;&emsp;&emsp;&emsp;+-- worlds\
-&emsp;&emsp;&emsp;&emsp;+-- worlds\
-&emsp;&emsp;&emsp;&emsp;+-- worlds\
-&emsp;&emsp;&emsp;&emsp;+-- worlds
-
-
-## Setup
-```
-sudo apt update
-```
-```
-sudo apt upgrade
-```
-``` 
-sudo apt install python3 && sudo sudo apt-get install python3-pip && sudo apt install tmux
-```
+If your disro is not supported open an issue and add your distro name in the os release file in /etc/os-release
