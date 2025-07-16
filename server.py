@@ -44,7 +44,12 @@ print("2. Start Instance")
 print("3. Delete Instance")
 print("4. Configure Instance")
 print("5. Global Settings")
-input_choice = int(input())
+while True:
+    try:
+        input_choice = int(input())
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        break
 
 if input_choice == 1:
     # Create Instance
