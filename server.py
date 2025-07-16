@@ -23,6 +23,9 @@ def ClearScreen():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
+# Variables
+input_choice = 0
+
 # Start of the script
 ClearScreen()
 
@@ -44,6 +47,8 @@ print("2. Start Instance")
 print("3. Delete Instance")
 print("4. Configure Instance")
 print("5. Global Settings")
+
+
 while True:
     try:
         input_choice = int(input())
