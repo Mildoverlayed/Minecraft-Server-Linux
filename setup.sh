@@ -14,6 +14,7 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install -y zulu17-ca-jre-headless
     sudo apt-get install -y zulu21-ca-jre-headless
     sudo apt install python3 -y
+    sudo apt install python3-pip -y
 
 elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
@@ -21,6 +22,7 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
     sudo apt install python3 -y
+    sudo apt install python3-pip -y
 
 else
     echo "Unsupported OS: $OS"
