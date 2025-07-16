@@ -1,6 +1,5 @@
 OS=$(sed -n 's/^NAME=//p' /etc/os-release | sed 's/^"\(.*\)"$/\1/')
 echo "Detected OS: $OS"
-
 if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt update && sudo apt install -y
     sudo apt-get -q update
@@ -14,14 +13,11 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install -y zulu8-ca-jre-headless
     sudo apt-get install -y zulu17-ca-jre-headless
     sudo apt-get install -y zulu21-ca-jre-headless
-
-
 elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt install openjdk-8-jre-headless -y
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
-
 else
     echo "Unsupported OS: $OS"
     echo "Please use Debian or Ubuntu." 
