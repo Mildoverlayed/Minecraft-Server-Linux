@@ -25,7 +25,7 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt-get install jq -y
     sudo apt install tmux -y
-    sudo apt install gotop -y
+    sudo snap install gotop -y
     sudo apt install openjdk-8-jre-headless -y
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
