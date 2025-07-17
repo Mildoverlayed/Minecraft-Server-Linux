@@ -56,6 +56,8 @@ def StartScreen():
     print("3. Delete Instance")
     print("4. Configure Instance")
     print("5. Global Settings")
+    print("6. Reboot Server")
+    print("7. Shutdown Server")
     print("\n \n")
     print(ErrorReturn)
 
@@ -180,7 +182,19 @@ while True:
         # Global Settings
         ClearScreen()
         pass
+    
+    elif input_choice == 6: # Exit
+        ClearScreen()
+        print("rebooting the server...")
+        os.system('sudo reboot now')
 
+    elif input_choice == 7: # TODO: Shutdown Server
+        ClearScreen()
+        if conferminput("Are you sure you want to shutdown the server? (Y/n): "):
+            print("Shutting down the server...")
+            os.system('sudo shutdown now')
+        else:
+            ErrorReturn = "Shutdown cancelled."
     else :
         print("Invalid choice. Please try again.")
 
