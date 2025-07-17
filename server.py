@@ -155,17 +155,17 @@ while True:
                     found = False
                     for i, line in enumerate(lines):
                         if line.strip().startswith('eula='):
-                            lines[i] = 'eula=TRUE\n'
+                            lines[i] = 'eula=true\n'
                             found = True
                     if not found:
-                        lines.append('eula=TRUE\n')
+                        lines.append('eula=true\n')
                     with open(eula_path, 'w') as f:
                         f.writelines(lines)
-                    print("eula.txt has been set to TRUE.")
+                    print("eula.txt has been set to true.")
                 else:
                     with open(eula_path, 'w') as f:
-                        f.write('eula=TRUE\n')
-                    print("eula.txt created and set to TRUE.")
+                        f.write('eula=true\n')
+                    print("eula.txt created and set to true.")
                 openfile.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
