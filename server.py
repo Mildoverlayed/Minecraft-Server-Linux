@@ -2,7 +2,7 @@
 import os
 import json
 import subprocess   
-
+import sys
 
 
 # Functions
@@ -112,12 +112,9 @@ while True:
                 print(f"Starting instance: {instance_name}")
                 # Build the command
                 cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui'
-                # Run and capture output
-                result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-                print("=== Server Output ===")
-                print(result.stdout)
-                print("=== Server Errors ===")
-                print(result.stderr)
+                # Start the server process and interact with it
+                with subprocess.Popen(cmd, shell=True, stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr) as proc:
+                    proc.wait()  # Wait for the server process to end before returning to the script
             else:
                 ErrorReturn = "Instance not found. Please try again."
         else:
