@@ -134,9 +134,15 @@ while True:
                         }
                         with open('config.json', 'w') as json_file:
                             json.dump(json_config, json_file, indent=4)
-
-
-                
+                with open(instance_path+'/Eula.txt', 'w') as openfile:
+                    for i, line in enumerate(openfile, start=1):
+                        if i == 3:
+                            line = openfile.readline().strip()
+                            if line[5:]:
+                                print("Eula.txt already exists and is set to true.")
+                            else:
+                                openfile.write("eula=true\n")
+                                print("Eula.txt has been set to true.")
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
