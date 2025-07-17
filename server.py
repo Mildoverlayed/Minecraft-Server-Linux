@@ -123,7 +123,7 @@ while True:
                        with jar.open('META-INF/MANIFEST.MF') as manifest:
                             for line in manifest:
                                 if b'Implementation-Version' in line:
-                                    print(line.decode().strip())
+                                    ErrorReturn = line.decode().strip()
 
 
 
