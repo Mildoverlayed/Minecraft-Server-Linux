@@ -173,20 +173,12 @@ while True:
                 
                 eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
-                    with open(eula_path, 'r') as f:
-                        lines = f.readlines()
-                    updated = False
-                    for i, line in enumerate(lines):
-                        if line.strip() == 'eula=false':
-                            lines[i] = 'eula=true\n'
-                            updated = True
-                    if updated:
-                        with open(eula_path, 'w') as f:
-                            f.writelines(lines)
-                            f.close()
-                        print("eula.txt updated to eula=true.")
-                    else:
-                        print("eula.txt already set to true. No changes made.")
+                    with open(eula_path, "r") as file:
+                        data = file.read()
+                        if "eula=false" in data:
+                            data = data.replace("eula=false", "eula=true")
+                            with open(eula_path, "w") as file:
+                                file.write(data)
                 else:
                     with open(eula_path, 'w') as f:
                         f.write(get_eula_time() + '\n')
