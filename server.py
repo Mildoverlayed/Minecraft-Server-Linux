@@ -6,7 +6,7 @@ import json
 
 
 # Functions
-def ListInstances():
+def ReturnListInstances():
     """
     List all Minecraft server instances.
     """
@@ -14,11 +14,13 @@ def ListInstances():
     if os.path.exists(folder_path):
         directories = [entry.name for entry in os.scandir(folder_path) if entry.is_dir()]
         if len(directories) > 0:
-            print(directories)
+            return directories
         else:
             print("No instances found. Please create an instance folder in the Instances directory.")
+            return False
     else:
         print("No instances found. Please create an instance folder in the Instances directory.")
+        return False
 
 def ClearScreen():
     """
@@ -90,7 +92,7 @@ while True:
     elif input_choice == 2:
         # Start Instance
         ClearScreen()
-        ListInstances()
+        #ListInstances()
         while True:
             ClearScreen()
             instance_name = input("Enter the instance name to start: ")
@@ -109,20 +111,18 @@ while True:
         # Delete Instance
         ClearScreen()
         if conferminput("Are you sure you want to delete an instance? (Y/n): "):
-            ListInstances()
-            instance_name = input("Enter the instance name to delete: ")
-            instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
-            if os.path.exists(instance_path):
-                os.rmdir(instance_path)
-            else:
-                ClearScreen()
-                print("Instance not found. Please try again. \n")
+            if ReturnListInstances() != False:
+                instance_name = input("Enter the instance name to delete: ")
+                instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
+                if os.path.exists(instance_path):
+                    os.rmdir(instance_path)
+                else:
+                    ClearScreen()
+                    print("Instance not found. Please try again. \n")
 
     elif input_choice == 4:
         # Configure Instance
         ClearScreen()
-        ListInstances()
-        instance_name = input("Enter the instance name to configure: ")
         pass
 
     elif input_choice == 5:
