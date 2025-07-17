@@ -14,5 +14,9 @@ tmux split-window -h -t $SESSION
 # Run gotop in the right pane (pane 1)
 tmux send-keys -t $SESSION:0.1 'gotop -l kitchensink' C-m
 
+# Focus the left pane (pane 0)
+tmux select-pane -t $SESSION:0.0
+
 # Attach to the session
 tmux attach -t $SESSION
+exit 0
