@@ -122,6 +122,7 @@ while True:
                     jar_path = jar_files[0]  # Use the first .jar file found
                     with zipfile.ZipFile(jar_path) as jar:
                         with jar.open('META-INF/MANIFEST.MF') as manifest:
+                            print("=== MANIFEST.MF CONTENTS ===")
                             for line in manifest:
                                 decoded = line.decode().strip()
                                 print(decoded)
@@ -130,7 +131,7 @@ while True:
                                     print("Minecraft server version:", decoded.split(":")[-1].strip())
                                     ErrorReturn = decoded.split(":")[-1].strip()
                                     break
-
+                            quit()
 
 
 
