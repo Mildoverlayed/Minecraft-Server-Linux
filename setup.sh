@@ -10,6 +10,8 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     curl -O https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-2_all.deb
     sudo apt-get install ./zulu-repo_1.0.0-2_all.deb
     sudo apt-get update
+    sudo apt install tmux -y
+    sudo apt install gotop -y
     sudo apt-get install jq -y
     sudo apt-get install -y zulu8-ca-jre-headless
     sudo apt-get install -y zulu17-ca-jre-headless
@@ -20,6 +22,8 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
 elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt-get install jq -y
+    sudo apt install tmux -y
+    sudo apt install gotop -y
     sudo apt install openjdk-8-jre-headless -y
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
