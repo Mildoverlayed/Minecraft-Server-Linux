@@ -7,6 +7,7 @@ import json
 
 # Functions
 def ReturnListInstances():
+    global ErrorReturn
     """
     List all Minecraft server instances.
     """
@@ -16,10 +17,10 @@ def ReturnListInstances():
         if len(directories) > 0:
             return directories
         else:
-            print("No instances found. Please create an instance folder in the Instances directory.")
+            ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
             return False
     else:
-        print("No instances found. Please create an instance folder in the Instances directory.")
+        ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
         return False
 
 def ClearScreen():
@@ -58,10 +59,12 @@ def StartScreen():
 
 
 # Variables
+global ErrorReturn
+ErrorReturn = ""
+
 input_choice = 0
 
 # Start of the script
-ErrorReturn = ""
 ClearScreen()
 while True:
 
@@ -123,9 +126,8 @@ while True:
                     os.rmdir(instance_path)
                 else:
                     ErrorReturn = "Instance not found. Please try again."
-            else:
-                ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
-
+        else:
+            ErrorReturn = "Deletion cancelled."
     elif input_choice == 4:
         # Configure Instance
         ClearScreen()
