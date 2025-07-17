@@ -177,8 +177,6 @@ while True:
                         lines = f.readlines()
                     updated = False
                     for i, line in enumerate(lines):
-                        if i == 1:
-                            lines[i] = get_eula_time() + '\n'
                         if line.strip() == 'eula=false':
                             lines[i] = 'eula=true\n'
                             updated = True
@@ -195,6 +193,12 @@ while True:
                         f.write('eula=true\n')
                         f.close()
                     print("eula.txt created and set to eula=true.")
+                with open(eula_path, 'w') as f:
+                    lines = f.readlines()
+                    lines[1]=get_eula_time() + '\n'
+                    f.writelines(lines)
+                    f.close()
+                print("eula.txt updated to eula=true.")
                 sleep(1)
 
                 print(f"Starting instance: {instance_name}")
