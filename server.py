@@ -102,6 +102,12 @@ while True:
         #ListInstances()
         while True:
             ClearScreen()
+            if ReturnListInstances() == False:
+                ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
+                break
+            print("Available instances:")
+            for instance in ReturnListInstances():
+                print(f" - {instance}")
             instance_name = input("Enter the instance name to start: ")
             if instance_name:
                 instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
