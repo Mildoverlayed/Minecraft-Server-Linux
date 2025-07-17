@@ -80,7 +80,6 @@ while True:
         exit()
 
     StartScreen()
-    print(ErrorReturn)
 
     while True:
         try:
