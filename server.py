@@ -156,18 +156,18 @@ while True:
                     found = False
                     for i, line in enumerate(lines):
                         if line.strip().startswith('eula='):
-                            lines[i] = 'eula=TRUE'
+                            lines[i] = 'eula=true\n'
                             found = True
                     if not found:
-                        lines.append('eula=TRUE')
+                        lines.append('eula=true\n')
                     with open(eula_path, 'w') as f:
                         f.writelines(lines)
-                    print("eula.txt has been set to TRUE.")
+                    print("eula.txt has been set to true.")
                     f.close()
                 else:
                     with open(eula_path, 'w') as f:
-                        f.write('eula=TRUE')
-                    print("eula.txt created and set to TRUE.")
+                        f.write('eula=true/n')
+                    print("eula.txt created and set to true.")
                     f.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
@@ -219,6 +219,13 @@ while True:
                 if os.path.exists(instance_path):
                     if conferminput(f"Are you sure you want to delete the instance '{instance_name}'? (Y/n): "):
                         os.system(f'rm -rf "{instance_path}"')
+                        with open('config.json', 'r+') as json_file:
+                            json_config = json.load(json_file)
+                            if instance_name in json_config:
+                                del json_config[instance_name]
+                                json_file.seek(0)
+                                json.dump(json_config, json_file, indent=4)
+                                json_file.truncate()
                         ErrorReturn = f"Instance '{instance_name}' deleted successfully."
                     else:
                         ErrorReturn = "Deletion cancelled."
