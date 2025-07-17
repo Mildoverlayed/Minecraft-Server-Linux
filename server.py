@@ -124,7 +124,7 @@ while True:
                        with jar.open('META-INF/MANIFEST.MF') as manifest:
                             for line in manifest:
                                 if b'Implementation-Version' in line:
-                                    ErrorReturn = line.decode().strip()
+                                    print(line.decode().strip())
                                 time.sleep(10)  # Wait for the version to be read
 
 
