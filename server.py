@@ -23,6 +23,19 @@ def ClearScreen():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def conferminput(prompt):
+    """
+    Get user confirmation input.
+    """
+    while True:
+        choice = input(prompt).lower()
+        if choice in ['y', 'yes']:
+            return True
+        elif choice in ['n', 'no']:
+            return False
+        else:
+            print("Please enter 'Y' or 'n'.")
+
 # Variables
 input_choice = 0
 
@@ -78,7 +91,7 @@ elif input_choice == 2:
     if instance_name:
         instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
         if os.path.exists(instance_path):
-            print("Use Global Max Ram amount %a (Y/N): ", MAXRAM )
+            conferminput("Use default RAM settings? MinRam:{MINRAM} MaxRam{MAXRAM} (Y/n): ")
 
 
 
