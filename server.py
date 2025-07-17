@@ -122,8 +122,9 @@ while True:
                 if os.path.exists(instance_path):
                     os.rmdir(instance_path)
                 else:
-                    ClearScreen()
                     ErrorReturn = "Instance not found. Please try again."
+            else:
+                ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
 
     elif input_choice == 4:
         # Configure Instance
