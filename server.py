@@ -141,8 +141,9 @@ while True:
                             if line[5:]:
                                 print("Eula.txt already exists and is set to true.")
                             else:
-                                openfile.write("eula=true\n")
+                                openfile.write("eula=true")
                                 print("Eula.txt has been set to true.")
+                openfile.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
