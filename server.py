@@ -99,32 +99,29 @@ while True:
     elif input_choice == 2: # TODO: Start Instance
         # Start Instance
         ClearScreen()
-        #ListInstances()
-        while True:
-            ClearScreen()
-            if ReturnListInstances() == False:
-                ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
-                break
-            print("Available instances:")
-            for instance in ReturnListInstances():
-                print(f" - {instance}")
-            instance_name = input("Enter the instance name to start: ")
-            if instance_name:
-                instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
-                if os.path.exists(instance_path):
-                    print(f"Starting instance: {instance_name}")
-                    # Build the command
-                    cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui'
-                    # Run and capture output
-                    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-                    print("=== Server Output ===")
-                    print(result.stdout)
-                    print("=== Server Errors ===")
-                    print(result.stderr)
-                else:
-                    ErrorReturn = "Instance not found. Please try again."
+        if ReturnListInstances() == False:
+            ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
+            break
+        print("Available instances:")
+        for instance in ReturnListInstances():
+            print(f" - {instance}")
+        instance_name = input("Enter the instance name to start: ")
+        if instance_name:
+            instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
+            if os.path.exists(instance_path):
+                print(f"Starting instance: {instance_name}")
+                # Build the command
+                cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui'
+                # Run and capture output
+                result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+                print("=== Server Output ===")
+                print(result.stdout)
+                print("=== Server Errors ===")
+                print(result.stderr)
             else:
-                ErrorReturn = "Instance name cannot be empty. Please try again."
+                ErrorReturn = "Instance not found. Please try again."
+        else:
+            ErrorReturn = "Instance name cannot be empty. Please try again."
 
     elif input_choice == 3: 
         # Delete Instance
