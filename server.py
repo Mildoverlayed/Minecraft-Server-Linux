@@ -40,6 +40,7 @@ def conferminput(prompt):
 input_choice = 0
 
 # Start of the script
+ClearScreen()
 while True:
 
     with open('config.json', 'r') as openfile:
