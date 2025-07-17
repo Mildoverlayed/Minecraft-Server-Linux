@@ -122,7 +122,11 @@ while True:
                 instance_name = input("Enter the instance name to delete: ")
                 instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
                 if os.path.exists(instance_path):
-                    os.rmdir(instance_path)
+                    if conferminput(f"Are you sure you want to delete the instance '{instance_name}'? (Y/n): "):
+                        os.system(f'rm -rf "{instance_path}"')
+                        ErrorReturn = f"Instance '{instance_name}' deleted successfully."
+                    else:
+                        ErrorReturn = "Deletion cancelled."
                 else:
                     ErrorReturn = "Instance not found. Please try again."
         else:
