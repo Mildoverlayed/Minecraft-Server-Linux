@@ -155,16 +155,16 @@ while True:
                     found = False
                     for i, line in enumerate(lines):
                         if line.strip().startswith('eula='):
-                            lines[i] = 'eula=true\n'
+                            lines[i] = 'eula=true'
                             found = True
                     if not found:
-                        lines.append('eula=true\n')
+                        lines.append('eula=true')
                     with open(eula_path, 'w') as f:
                         f.writelines(lines)
                     print("eula.txt has been set to true.")
                 else:
                     with open(eula_path, 'w') as f:
-                        f.write('eula=true\n')
+                        f.write('eula=true')
                     print("eula.txt created and set to true.")
                 openfile.close()
                 print(f"Starting instance: {instance_name}")
