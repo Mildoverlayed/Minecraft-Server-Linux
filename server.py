@@ -134,7 +134,7 @@ while True:
                         }
                         with open('config.json', 'w') as json_file:
                             json.dump(json_config, json_file, indent=4)
-                with open(instance_path+'/Eula.txt', 'w') as openfile:
+                with open(instance_path+'/Eula.txt', 'r+') as openfile:
                     for i, line in enumerate(openfile, start=1):
                         if i == 3:
                             line = openfile.readline().strip()
