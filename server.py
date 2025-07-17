@@ -123,7 +123,7 @@ while True:
                     os.rmdir(instance_path)
                 else:
                     ClearScreen()
-                    print("Instance not found. Please try again. \n")
+                    ErrorReturn = "Instance not found. Please try again."
 
     elif input_choice == 4:
         # Configure Instance
