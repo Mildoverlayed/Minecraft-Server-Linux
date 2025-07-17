@@ -5,7 +5,7 @@ import subprocess
 import sys
 import threading
 import glob
-from time import time
+import time
 import zipfile
 
 # Functions
