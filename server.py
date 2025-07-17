@@ -155,7 +155,7 @@ while True:
                             json.dump(json_config, json_file, indent=4)
 
                 # Handle EULA
-                """
+                
                 eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
                     with open(eula_path, 'r') as f:
@@ -163,19 +163,19 @@ while True:
                     updated = False
                     for i, line in enumerate(lines):
                         if line.strip() == 'eula=false':
-                            lines[i] = 'eula=true\n'
+                            lines[i] = 'eula=bob\n'
                             updated = True
                     if updated:
                         with open(eula_path, 'w') as f:
                             f.writelines(lines)
-                        print("eula.txt updated to eula=true.")
+                        print("eula.txt updated to eula=bob.")
                     else:
                         print("eula.txt already set to true. No changes made.")
                 else:
                     with open(eula_path, 'w') as f:
-                        f.write('eula=true\n')
-                    print("eula.txt created and set to true.")
-                """
+                        f.write('eula=bob\n')
+                    print("eula.txt created and set to eula=bob.")
+
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
