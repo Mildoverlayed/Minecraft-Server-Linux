@@ -173,28 +173,22 @@ while True:
                 
                 eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
+                    sleep(1)
                     with open(eula_path, "r") as file:
                         data = file.read()
                         if "eula=false" in data:
                             data = data.replace("eula=false", "eula=true")
                             with open(eula_path, "w") as file:
                                 file.write(data)
+                                sleep(1)
                 else:
+                    sleep(1)
                     with open(eula_path, 'w') as f:
                         f.write(get_eula_time() + '\n')
                         f.write('eula=true\n')
                         f.close()
                     print("eula.txt created and set to eula=true.")
-                with open(eula_path, 'r+') as f:
-                    lines = f.readlines()
-                    for i, line in enumerate(lines):
-                        if i == 1:
-                            lines[i] = get_eula_time() + '\n'
-                            break
-                    f.writelines(lines)
-                    f.close()
-                print("eula.txt Time updated.")
-                sleep(1)
+                    sleep(1)
 
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
