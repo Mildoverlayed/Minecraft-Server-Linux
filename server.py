@@ -81,10 +81,10 @@ def is_valid_instance_name(name):
     # Only allow alphanumeric, dash, and underscore
     return name.isidentifier() or all(c.isalnum() or c in ('-', '_') for c in name)
 
-def get_elua_time():
+def get_eula_time():
     # Set the Eastern Timezone
     zone = pytz.timezone(ZONE)
-    
+
     # Get current UTC time and convert it to Eastern Time
     now = datetime.now(pytz.utc).astimezone(zone)
 
@@ -177,6 +177,8 @@ while True:
                         lines = f.readlines()
                     updated = False
                     for i, line in enumerate(lines):
+                        if i == 1:
+                            lines[i] = get_eula_time() + '\n'
                         if line.strip() == 'eula=false':
                             lines[i] = 'eula=true\n'
                             updated = True
@@ -189,10 +191,12 @@ while True:
                         print("eula.txt already set to true. No changes made.")
                 else:
                     with open(eula_path, 'w') as f:
+                        f.write(get_eula_time() + '\n')
                         f.write('eula=true\n')
                         f.close()
                     print("eula.txt created and set to eula=true.")
                 sleep(1)
+
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
