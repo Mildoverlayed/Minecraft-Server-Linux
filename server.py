@@ -41,6 +41,22 @@ def conferminput(prompt):
         else:
             print("Please enter 'Y' or 'n'.")
 
+def StartScreen():
+    """
+    Display the start screen.
+    """
+    ClearScreen()
+    print("Minecraft Server Manager")
+    print("choose an option:")
+    print("1. Create Instance")
+    print("2. Start Instance")
+    print("3. Delete Instance")
+    print("4. Configure Instance")
+    print("5. Global Settings")
+    print("\n \n")
+    print(ErrorReturn)
+    print(">> ", end="")
+
 # Variables
 input_choice = 0
 
@@ -60,14 +76,7 @@ while True:
         print("Please run the setup first.")
         exit()
 
-    print("Minecraft Server Manager")
-    print("choose an option:")
-    print("1. Create Instance")
-    print("2. Start Instance")
-    print("3. Delete Instance")
-    print("4. Configure Instance")
-    print("5. Global Settings")
-    print("\n \n")
+    StartScreen()
     print(ErrorReturn)
 
     while True:
@@ -75,15 +84,9 @@ while True:
             input_choice = int(input())
             break
         except ValueError:
+            ErrorReturn = "Invalid input. Please enter a number between 1 and 5."
             ClearScreen()
-            print("Minecraft Server Manager")
-            print("choose an option:")
-            print("1. Create Instance")
-            print("2. Start Instance")
-            print("3. Delete Instance")
-            print("4. Configure Instance")
-            print("5. Global Settings")
-            print("\n \n Invalid input. Please enter a number.")
+            StartScreen()
             continue
 
     if input_choice == 1:
