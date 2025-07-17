@@ -201,7 +201,7 @@ while True:
                             break
                     f.writelines(lines)
                     f.close()
-                print("eula.txt updated to eula=true.")
+                print("eula.txt Time updated.")
                 sleep(1)
 
                 print(f"Starting instance: {instance_name}")
