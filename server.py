@@ -91,12 +91,12 @@ while True:
             StartScreen()
             continue
 
-    if input_choice == 1:
+    if input_choice == 1: # TODO: Create Instance
         # Create Instance
         ClearScreen()
         pass
 
-    elif input_choice == 2:
+    elif input_choice == 2: # TODO: Start Instance
         # Start Instance
         ClearScreen()
         #ListInstances()
@@ -107,14 +107,14 @@ while True:
                 instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
                 if os.path.exists(instance_path):
                     print(f"Starting instance: {instance_name}")
-                    os.system(f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/server.jar" nogui')
+                    os.system(f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui')
                     break
                 else:
                     ErrorReturn = "Instance not found. Please try again."
             else:
                 ErrorReturn = "Instance name cannot be empty. Please try again."
 
-    elif input_choice == 3:
+    elif input_choice == 3: 
         # Delete Instance
         ClearScreen()
         if conferminput("Are you sure you want to delete an instance? (Y/n): "):
@@ -134,12 +134,11 @@ while True:
                     ErrorReturn = "Instance not found. Please try again."
         else:
             ErrorReturn = "Deletion cancelled."
-    elif input_choice == 4:
-        # Configure Instance
+    elif input_choice == 4: # TODO: Configure Instance
         ClearScreen()
         pass
 
-    elif input_choice == 5:
+    elif input_choice == 5: # TODO: Global Settings
         # Global Settings
         ClearScreen()
         pass
