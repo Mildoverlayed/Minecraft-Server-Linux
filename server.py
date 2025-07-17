@@ -122,6 +122,7 @@ while True:
                     jar_path = jar_files[0]  # Use the first .jar file found
                     with zipfile.ZipFile(jar_path) as jar:
                        with jar.open('META-INF/MANIFEST.MF') as manifest:
+                            print(manifest)
                             for line in manifest:
                                 if b'Implementation-Version' in line:
                                     print(line.decode().strip())
