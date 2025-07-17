@@ -155,18 +155,18 @@ while True:
                     found = False
                     for i, line in enumerate(lines):
                         if line.strip().startswith('eula='):
-                            lines[i] = 'eula=true'
+                            lines[i] = 'eula=TRUE'
                             found = True
                     if not found:
-                        lines.append('eula=true')
+                        lines.append('eula=TRUE')
                     with open(eula_path, 'w') as f:
                         f.writelines(lines)
-                    print("eula.txt has been set to true.")
+                    print("eula.txt has been set to TRUE.")
                 else:
                     with open(eula_path, 'w') as f:
-                        f.write('eula=true')
-                    print("eula.txt created and set to true.")
-                openfile.close()
+                        f.write('eula=TRUE')
+                    print("eula.txt created and set to TRUE.")
+                json_file.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
