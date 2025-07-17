@@ -148,7 +148,7 @@ while True:
                         }
                         with open('config.json', 'w') as json_file:
                             json.dump(json_config, json_file, indent=4)
-                eula_path = os.path.join(instance_path, 'Eula.txt')
+                eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
                     with open(eula_path, 'r') as f:
                         lines = f.readlines()
@@ -161,11 +161,11 @@ while True:
                         lines.append('eula=true\n')
                     with open(eula_path, 'w') as f:
                         f.writelines(lines)
-                    print("Eula.txt has been set to true.")
+                    print("eula.txt has been set to true.")
                 else:
                     with open(eula_path, 'w') as f:
                         f.write('eula=true\n')
-                    print("Eula.txt created and set to true.")
+                    print("eula.txt created and set to true.")
                 openfile.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
