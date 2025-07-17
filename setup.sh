@@ -80,7 +80,7 @@ if [[ "$install_test_server" = "Y" || "$install_test_server" = "y" ]]; then
     cd Instances 
     git clone https://github.com/Mildoverlayed/Example-Minecraft-Server.git
     echo "Test server installed in Instances/Example-Minecraft-Server"
-    echo "To run the server, run server.py and follow the instructions."
+    echo "To run the server, run StartServer.sh and follow the instructions."
 else
     echo "Skipping test server installation."
     echo "You can manually clone the repository later if needed."
