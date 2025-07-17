@@ -1,7 +1,7 @@
 #import necessary modules
 import os
 import json
-
+import subprocess   
 
 
 
@@ -113,8 +113,14 @@ while True:
                 instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
                 if os.path.exists(instance_path):
                     print(f"Starting instance: {instance_name}")
-                    os.system(f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui')
-                    break
+                    # Build the command
+                    cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui'
+                    # Run and capture output
+                    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+                    print("=== Server Output ===")
+                    print(result.stdout)
+                    print("=== Server Errors ===")
+                    print(result.stderr)
                 else:
                     ErrorReturn = "Instance not found. Please try again."
             else:
