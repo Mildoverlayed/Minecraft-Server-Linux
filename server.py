@@ -127,7 +127,7 @@ while True:
                                 if 'Implementation-Version' in decoded:
                                     print("Minecraft server version:", decoded.split(":")[-1].strip())
                                     break
-                                time.sleep(10)  # Wait for the version to be read
+                    time.sleep(10)  # Wait for the version to be read
 
 
 
