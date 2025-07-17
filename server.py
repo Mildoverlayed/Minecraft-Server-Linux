@@ -5,6 +5,7 @@ import subprocess
 import sys
 import threading
 import glob
+from time import time
 import zipfile
 
 # Functions
@@ -124,6 +125,7 @@ while True:
                             for line in manifest:
                                 if b'Implementation-Version' in line:
                                     ErrorReturn = line.decode().strip()
+                                time.sleep(10)  # Wait for the version to be read
 
 
 
