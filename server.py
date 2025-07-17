@@ -124,11 +124,11 @@ while True:
                         with jar.open('META-INF/MANIFEST.MF') as manifest:
                             for line in manifest:
                                 decoded = line.decode().strip()
+                                print(decoded)
                                 if 'Implementation-Version' in decoded:
                                     print("Minecraft server version:", decoded.split(":")[-1].strip())
                                     ErrorReturn = decoded.split(":")[-1].strip()
                                     break
-                    time.sleep(10)  # Wait for the version to be read
 
 
 
