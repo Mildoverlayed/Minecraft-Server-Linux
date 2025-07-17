@@ -1,5 +1,6 @@
 {
     "DISTRO": "",
+    "ZONE": "",
     "SETUP": false,
     "MINRAM": "1024",
     "MAXRAM": "2048"

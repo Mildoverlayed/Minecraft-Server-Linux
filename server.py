@@ -6,6 +6,8 @@ import sys
 import threading
 import glob
 from time import sleep
+from datetime import datetime
+import pytz
 
 
 # Functions
@@ -79,6 +81,17 @@ def is_valid_instance_name(name):
     # Only allow alphanumeric, dash, and underscore
     return name.isidentifier() or all(c.isalnum() or c in ('-', '_') for c in name)
 
+def get_elua_time():
+    # Set the Eastern Timezone
+    zone = pytz.timezone(ZONE)
+    
+    # Get current UTC time and convert it to Eastern Time
+    now = datetime.now(pytz.utc).astimezone(zone)
+
+    # Format it to match the desired style
+    formatted = now.strftime('%a %b %d %H:%M:%S %Z %Y')
+    return formatted
+
 # Variables
 global ErrorReturn
 ErrorReturn = ""
@@ -96,6 +109,7 @@ while True:
         MINRAM = json_config['MINRAM']
         MAXRAM = json_config['MAXRAM']
         DISTRO = json_config['DISTRO']
+        ZONE = json_config['ZONE']
 
     if not SETUP:
         print("Please run the setup first.")

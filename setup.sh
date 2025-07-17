@@ -82,6 +82,8 @@ else
     echo "Thank you for using My Minecraft Server Manager!"
     exit 1
 fi
-
-
+echo "we now need to set the timezone for the server, please enter your timezone (e.g. Europe/London, America/New_York):"
+echo "You can find your timezone at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones make sure to use the TZ identifier."
+read -r timezone
+jq --arg timezone "$timezone" '.ZONE = $timezone' config.json > config.tmp && mv config.tmp config.json
 exit 0
