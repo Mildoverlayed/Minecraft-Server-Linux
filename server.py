@@ -5,7 +5,7 @@ import subprocess
 import sys
 import threading
 import glob
-
+import zipfile
 
 # Functions
 def ReturnListInstances():
@@ -100,7 +100,7 @@ while True:
         ClearScreen()
         pass
 
-    elif input_choice == 2: # TODO: Start Instance
+    elif input_choice == 2:
         # Start Instance
         ClearScreen()
         if ReturnListInstances() == False:
@@ -119,6 +119,21 @@ while True:
                     ErrorReturn = "No .jar file found in the instance directory."
                 else:
                     jar_path = jar_files[0]  # Use the first .jar file found
+                    with zipfile.ZipFile(jar_path) as jar:
+                       with jar.open('META-INF/MANIFEST.MF') as manifest:
+                            for line in manifest:
+                                if b'Implementation-Version' in line:
+                                    print(line.decode().strip())
+
+
+
+
+
+
+
+
+
+                    """
                     cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
                     proc = subprocess.Popen(
                         cmd,
@@ -149,6 +164,7 @@ while True:
                     except KeyboardInterrupt:
                         proc.terminate()
                     output_thread.join()
+                    """
             else:
                 ErrorReturn = "Instance not found. Please try again."
         else:
@@ -174,13 +190,13 @@ while True:
                     ErrorReturn = "Instance not found. Please try again."
         else:
             ErrorReturn = "Deletion cancelled."
+
     elif input_choice == 4: # TODO: Configure Instance
         ClearScreen()
         pass
 
     elif input_choice == 5: # TODO: Global Settings
         # Global Settings
-        ClearScreen()
         pass
     
     elif input_choice == 6: # Exit
@@ -195,6 +211,7 @@ while True:
             os.system('sudo shutdown now')
         else:
             ErrorReturn = "Shutdown cancelled."
+
     else :
         print("Invalid choice. Please try again.")
 
