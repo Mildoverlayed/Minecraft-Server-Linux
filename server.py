@@ -13,7 +13,10 @@ def ListInstances():
     folder_path = os.path.join(os.path.dirname(__file__), 'Instances')
     if os.path.exists(folder_path):
         directories = [entry.name for entry in os.scandir(folder_path) if entry.is_dir()]
-        print(directories)
+        if len(directories) > 0:
+            print(directories)
+        else:
+            print("No instances found. Please create an instance folder in the Instances directory.")
     else:
         print("No instances found. Please create an instance folder in the Instances directory.")
 
