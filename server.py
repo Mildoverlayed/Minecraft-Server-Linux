@@ -3,6 +3,7 @@ import os
 import json
 import subprocess   
 import sys
+import threading
 
 
 # Functions
@@ -110,11 +111,36 @@ while True:
             instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
             if os.path.exists(instance_path):
                 print(f"Starting instance: {instance_name}")
-                # Build the command
                 cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui'
-                # Start the server process and interact with it
-                with subprocess.Popen(cmd, shell=True, stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr) as proc:
-                    proc.wait()  # Wait for the server process to end before returning to the script
+                proc = subprocess.Popen(
+                    cmd,
+                    shell=True,
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    bufsize=1
+                )
+
+                def read_output(p):
+                    for line in p.stdout:
+                        print(line, end='')
+
+                output_thread = threading.Thread(target=read_output, args=(proc,))
+                output_thread.daemon = True
+                output_thread.start()
+
+                try:
+                    while proc.poll() is None:
+                        user_input = input()
+                        if user_input.strip().lower() == "exit":
+                            proc.terminate()
+                            break
+                        proc.stdin.write(user_input + '\n')
+                        proc.stdin.flush()
+                except KeyboardInterrupt:
+                    proc.terminate()
+                output_thread.join()
             else:
                 ErrorReturn = "Instance not found. Please try again."
         else:
