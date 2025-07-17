@@ -55,7 +55,7 @@ def StartScreen():
     print("5. Global Settings")
     print("\n \n")
     print(ErrorReturn)
-    print(">> ", end="")
+
 
 # Variables
 input_choice = 0
@@ -81,7 +81,7 @@ while True:
 
     while True:
         try:
-            input_choice = int(input())
+            input_choice = int(input(">> "))
             break
         except ValueError:
             ErrorReturn = "Invalid input. Please enter a number between 1 and 5."
