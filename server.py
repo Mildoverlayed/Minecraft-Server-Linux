@@ -5,6 +5,7 @@ import subprocess
 import sys
 import threading
 import glob
+from time import sleep
 
 
 # Functions
@@ -177,7 +178,7 @@ while True:
                         f.write('eula=true\n')
                         f.close()
                     print("eula.txt created and set to eula=true.")
-
+                sleep(1)
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
