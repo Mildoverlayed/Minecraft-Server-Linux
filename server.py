@@ -195,7 +195,10 @@ while True:
                     print("eula.txt created and set to eula=true.")
                 with open(eula_path, 'r+') as f:
                     lines = f.readlines()
-                    lines[1]=get_eula_time() + '\n'
+                    for i, line in enumerate(lines):
+                        if i == 1:
+                            lines[i] = get_eula_time() + '\n'
+                            break
                     f.writelines(lines)
                     f.close()
                 print("eula.txt updated to eula=true.")
