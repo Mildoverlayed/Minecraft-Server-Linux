@@ -12,7 +12,19 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install ./zulu-repo_1.0.0-2_all.deb
     sudo apt-get update
     sudo apt install tmux -y
-    sudo apt install gotop -y
+    # Install gotop (latest .deb from v4.2.0 release)
+    GOTOP_URL=$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases/tags/v4.2.0 \
+      | grep "browser_download_url" \
+      | grep "amd64.deb" \
+      | cut -d '"' -f 4 | head -n 1)
+
+    if [ -n "$GOTOP_URL" ]; then
+        wget "$GOTOP_URL" -O gotop.deb
+        sudo dpkg -i gotop.deb
+        rm gotop.deb
+    else
+        echo "Could not find gotop .deb package for v4.2.0"
+    fi
     sudo apt-get install jq -y
     sudo apt-get install -y zulu8-ca-jre-headless
     sudo apt-get install -y zulu17-ca-jre-headless
@@ -25,7 +37,21 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt-get install jq -y
     sudo apt install tmux -y
-    sudo snap install gotop -y
+
+    # Install gotop (latest .deb from v4.2.0 release)
+    GOTOP_URL=$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases/tags/v4.2.0 \
+      | grep "browser_download_url" \
+      | grep "amd64.deb" \
+      | cut -d '"' -f 4 | head -n 1)
+
+    if [ -n "$GOTOP_URL" ]; then
+        wget "$GOTOP_URL" -O gotop.deb
+        sudo dpkg -i gotop.deb
+        rm gotop.deb
+    else
+        echo "Could not find gotop .deb package for v4.2.0"
+    fi
+
     sudo apt install openjdk-8-jre-headless -y
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
