@@ -74,6 +74,10 @@ def SetJavaVers(version):
         print("Unsupported distribution. Please set the Java version manually.")
         return False
 
+def is_valid_instance_name(name):
+    # Only allow alphanumeric, dash, and underscore
+    return name.isidentifier() or all(c.isalnum() or c in ('-', '_') for c in name)
+
 # Variables
 global ErrorReturn
 ErrorReturn = ""
@@ -122,10 +126,20 @@ while True:
         print("Available instances:")
         for instance in ReturnListInstances():
             print(f" - {instance}")
-        instance_name = input("Enter the instance name to start: ")
-        if instance_name:
-            instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
-            if os.path.exists(instance_path):
+        instance_name = input("Enter the instance name to start: ").strip()
+
+        if not is_valid_instance_name(instance_name):
+            ErrorReturn = "Invalid instance name. Only letters, numbers, dash, and underscore are allowed."
+        else:
+            base_dir = os.path.join(os.path.dirname(__file__), 'Instances')
+            instance_path = os.path.abspath(os.path.join(base_dir, instance_name))
+            # Ensure instance_path is inside Instances directory
+            if not instance_path.startswith(os.path.abspath(base_dir) + os.sep):
+                ErrorReturn = "Path injection detected. Aborting."
+            elif not os.path.exists(instance_path):
+                ErrorReturn = "Instance not found. Please try again."
+            else:
+                # Safe to use instance_path
                 if instance_name not in json_config:
                     if conferminput(f"Instance '{instance_name}' does not have a minecraft version set would you like to set it now? (Y/n): "):
                         minecraft_version = input("Enter the Minecraft version (e.g. 1.16.5): ")
@@ -134,15 +148,24 @@ while True:
                         }
                         with open('config.json', 'w') as json_file:
                             json.dump(json_config, json_file, indent=4)
-                with open(instance_path+'/Eula.txt', 'r+') as openfile:
-                    for i, line in enumerate(openfile, start=1):
-                        if i == 3:
-                            line = openfile.readline().strip()
-                            if line[5:]:
-                                print("Eula.txt already exists and is set to true.")
-                            else:
-                                openfile.write("eula=true")
-                                print("Eula.txt has been set to true.")
+                eula_path = os.path.join(instance_path, 'Eula.txt')
+                if os.path.exists(eula_path):
+                    with open(eula_path, 'r') as f:
+                        lines = f.readlines()
+                    found = False
+                    for i, line in enumerate(lines):
+                        if line.strip().startswith('eula='):
+                            lines[i] = 'eula=true\n'
+                            found = True
+                    if not found:
+                        lines.append('eula=true\n')
+                    with open(eula_path, 'w') as f:
+                        f.writelines(lines)
+                    print("Eula.txt has been set to true.")
+                else:
+                    with open(eula_path, 'w') as f:
+                        f.write('eula=true\n')
+                    print("Eula.txt created and set to true.")
                 openfile.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
