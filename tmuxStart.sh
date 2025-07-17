@@ -12,7 +12,7 @@ tmux send-keys -t $SESSION 'python3 server.py' C-m
 tmux split-window -h -t $SESSION
 
 # Run gotop in the right pane (pane 1)
-tmux send-keys -t $SESSION:0.1 'gotop' C-m
+tmux send-keys -t $SESSION:0.1 'gotop -l kitchensink' C-m
 
 # Attach to the session
 tmux attach -t $SESSION
