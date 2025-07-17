@@ -45,6 +45,7 @@ def conferminput(prompt):
 input_choice = 0
 
 # Start of the script
+ErrorReturn = ""
 ClearScreen()
 while True:
 
@@ -66,7 +67,8 @@ while True:
     print("3. Delete Instance")
     print("4. Configure Instance")
     print("5. Global Settings")
-
+    print("\n \n")
+    print(ErrorReturn)
 
     while True:
         try:
@@ -103,9 +105,9 @@ while True:
                     os.system(f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/server.jar" nogui')
                     break
                 else:
-                    print("Instance not found. Please try again.")
+                    ErrorReturn = "Instance not found. Please try again."
             else:
-                print("Instance name cannot be empty. Please try again.")
+                ErrorReturn = "Instance name cannot be empty. Please try again."
 
     elif input_choice == 3:
         # Delete Instance
