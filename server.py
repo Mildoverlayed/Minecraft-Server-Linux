@@ -5,8 +5,7 @@ import subprocess
 import sys
 import threading
 import glob
-import time
-import zipfile
+
 
 # Functions
 def ReturnListInstances():
@@ -63,6 +62,18 @@ def StartScreen():
     print(ErrorReturn)
 
 
+def SetJavaVers(version):
+    if DISTRO == "Debian GNU/Linux":
+        if version in range(1.12,1.176):
+            os.system("PATH=/usr/lib/jvm/zulu8-ca-arm64/jre/bin/java")
+        elif version >= 1.18:
+            os.system("PATH=/usr/lib/jvm/zulu17-ca-arm64/jre/bin/java")
+    elif DISTRO == "Ubuntu":
+        pass
+    else:
+        print("Unsupported distribution. Please set the Java version manually.")
+        return False
+
 # Variables
 global ErrorReturn
 ErrorReturn = ""
@@ -75,10 +86,11 @@ while True:
 
     with open('config.json', 'r') as openfile:
 
-        json_object = json.load(openfile)
-        SETUP = json_object['SETUP']
-        MINRAM = json_object['MINRAM']
-        MAXRAM = json_object['MAXRAM']
+        json_config = json.load(openfile)
+        SETUP = json_config['SETUP']
+        MINRAM = json_config['MINRAM']
+        MAXRAM = json_config['MAXRAM']
+        DISTRO = json_config['DISTRO']
 
     if not SETUP:
         print("Please run the setup first.")
@@ -114,33 +126,23 @@ while True:
         if instance_name:
             instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
             if os.path.exists(instance_path):
+                if instance_name not in json_config:
+                    if conferminput(f"Instance '{instance_name}' does not have a minecraft version set would you like to set it now? (Y/n): "):
+                        minecraft_version = input("Enter the Minecraft version (e.g. 1.16.5): ")
+                        json_config[instance_name] = {
+                            "version": minecraft_version
+                        }
+                        with open('config.json', 'w') as json_file:
+                            json.dump(json_config, json_file, indent=4)
+
+
+                
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
                     ErrorReturn = "No .jar file found in the instance directory."
                 else:
                     jar_path = jar_files[0]  # Use the first .jar file found
-                    with zipfile.ZipFile(jar_path) as jar:
-                        with jar.open('META-INF/MANIFEST.MF') as manifest:
-                            print("=== MANIFEST.MF CONTENTS ===")
-                            for line in manifest:
-                                decoded = line.decode().strip()
-                                print(decoded)
-                                ErrorReturn = decoded
-                                if 'Implementation-Version' in decoded:
-                                    print("Minecraft server version:", decoded.split(":")[-1].strip())
-                                    ErrorReturn = decoded.split(":")[-1].strip()
-                                    break
-                            quit()
-
-
-
-
-
-
-
-
-                    """
                     cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
                     proc = subprocess.Popen(
                         cmd,
@@ -171,7 +173,6 @@ while True:
                     except KeyboardInterrupt:
                         proc.terminate()
                     output_thread.join()
-                    """
             else:
                 ErrorReturn = "Instance not found. Please try again."
         else:

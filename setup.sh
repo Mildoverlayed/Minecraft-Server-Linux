@@ -1,6 +1,7 @@
 OS=$(sed -n 's/^NAME=//p' /etc/os-release | sed 's/^"\(.*\)"$/\1/')
 echo "Detected OS: $OS"
 if [ "$OS" = "Debian GNU/Linux" ]; then
+    jq '.DISTRO = "Debian GNU/Linux"' config.json > config.tmp && mv config.tmp config.json
     sudo apt update && sudo apt install -y
     sudo apt-get -q update
     sudo apt-get -yq install gnupg curl
@@ -20,6 +21,7 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt install python3-pip -y
 
 elif [ "$OS" = "Ubuntu" ]; then
+    jq '.DISTRO = "Ubuntu"' config.json > config.tmp && mv config.tmp config.json
     sudo apt update && sudo apt install -y
     sudo apt-get install jq -y
     sudo apt install tmux -y
