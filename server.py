@@ -41,19 +41,18 @@ input_choice = 0
 
 # Start of the script
 while True:
-    ClearScreen()
-    
+
     with open('config.json', 'r') as openfile:
-    
+
         json_object = json.load(openfile)
         SETUP = json_object['SETUP']
         MINRAM = json_object['MINRAM']
         MAXRAM = json_object['MAXRAM']
-    
+
     if not SETUP:
         print("Please run the setup first.")
         exit()
-    
+
     print("Minecraft Server Manager")
     print("choose an option:")
     print("1. Create Instance")
@@ -61,8 +60,8 @@ while True:
     print("3. Delete Instance")
     print("4. Configure Instance")
     print("5. Global Settings")
-    
-    
+
+
     while True:
         try:
             input_choice = int(input())
@@ -78,12 +77,12 @@ while True:
             print("5. Global Settings")
             print("\n \n Invalid input. Please enter a number.")
             continue
-        
+
     if input_choice == 1:
         # Create Instance
         ClearScreen()
         pass
-    
+
     elif input_choice == 2:
         # Start Instance
         ClearScreen()
@@ -101,7 +100,7 @@ while True:
                     print("Instance not found. Please try again.")
             else:
                 print("Instance name cannot be empty. Please try again.")
-    
+
     elif input_choice == 3:
         # Delete Instance
         ClearScreen()
@@ -112,28 +111,29 @@ while True:
             if os.path.exists(instance_path):
                 os.rmdir(instance_path)
             else:
-                print("Instance not found. Please try again.")
-    
+                ClearScreen()
+                print("Instance not found. Please try again. \n")
+
     elif input_choice == 4:
         # Configure Instance
         ClearScreen()
         ListInstances()
         instance_name = input("Enter the instance name to configure: ")
         pass
-    
+
     elif input_choice == 5:
         # Global Settings
         ClearScreen()
         pass
-    
+
     else :
         print("Invalid choice. Please try again.")
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
     #java -Xmx1024M -Xms1024M -jar server.jar nogui
