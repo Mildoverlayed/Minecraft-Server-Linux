@@ -119,6 +119,9 @@ while True:
         ClearScreen()
         if conferminput("Are you sure you want to delete an instance? (Y/n): "):
             if ReturnListInstances() != False:
+                print("Available instances:")
+                for instance in ReturnListInstances():
+                    print(f" - {instance}")
                 instance_name = input("Enter the instance name to delete: ")
                 instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
                 if os.path.exists(instance_path):
