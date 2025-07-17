@@ -4,6 +4,7 @@ import json
 import subprocess   
 import sys
 import threading
+import glob
 
 
 # Functions
@@ -111,36 +112,41 @@ while True:
             instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
             if os.path.exists(instance_path):
                 print(f"Starting instance: {instance_name}")
-                cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{instance_path}/*.jar" nogui'
-                proc = subprocess.Popen(
-                    cmd,
-                    shell=True,
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    text=True,
-                    bufsize=1
-                )
+                jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
+                if not jar_files:
+                    ErrorReturn = "No .jar file found in the instance directory."
+                else:
+                    jar_path = jar_files[0]  # Use the first .jar file found
+                    cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
+                    proc = subprocess.Popen(
+                        cmd,
+                        shell=True,
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.STDOUT,
+                        text=True,
+                        bufsize=1
+                    )
 
-                def read_output(p):
-                    for line in p.stdout:
-                        print(line, end='')
+                    def read_output(p):
+                        for line in p.stdout:
+                            print(line, end='')
 
-                output_thread = threading.Thread(target=read_output, args=(proc,))
-                output_thread.daemon = True
-                output_thread.start()
+                    output_thread = threading.Thread(target=read_output, args=(proc,))
+                    output_thread.daemon = True
+                    output_thread.start()
 
-                try:
-                    while proc.poll() is None:
-                        user_input = input()
-                        if user_input.strip().lower() == "exit":
-                            proc.terminate()
-                            break
-                        proc.stdin.write(user_input + '\n')
-                        proc.stdin.flush()
-                except KeyboardInterrupt:
-                    proc.terminate()
-                output_thread.join()
+                    try:
+                        while proc.poll() is None:
+                            user_input = input()
+                            if user_input.strip().lower() == "exit":
+                                proc.terminate()
+                                break
+                            proc.stdin.write(user_input + '\n')
+                            proc.stdin.flush()
+                    except KeyboardInterrupt:
+                        proc.terminate()
+                    output_thread.join()
             else:
                 ErrorReturn = "Instance not found. Please try again."
         else:
