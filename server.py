@@ -121,11 +121,12 @@ while True:
                 else:
                     jar_path = jar_files[0]  # Use the first .jar file found
                     with zipfile.ZipFile(jar_path) as jar:
-                       with jar.open('META-INF/MANIFEST.MF') as manifest:
+                        with jar.open('META-INF/MANIFEST.MF') as manifest:
                             for line in manifest:
-                                print(line.decode().strip())
-                                if b'Implementation-Version' in line:
-                                    print(line.decode().strip())
+                                decoded = line.decode().strip()
+                                if 'Implementation-Version' in decoded:
+                                    print("Minecraft server version:", decoded.split(":")[-1].strip())
+                                    break
                                 time.sleep(10)  # Wait for the version to be read
 
 
