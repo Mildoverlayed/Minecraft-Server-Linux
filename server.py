@@ -125,6 +125,7 @@ while True:
                             for line in manifest:
                                 decoded = line.decode().strip()
                                 print(decoded)
+                                ErrorReturn = decoded
                                 if 'Implementation-Version' in decoded:
                                     print("Minecraft server version:", decoded.split(":")[-1].strip())
                                     ErrorReturn = decoded.split(":")[-1].strip()
