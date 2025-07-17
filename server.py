@@ -203,10 +203,6 @@ while True:
                     except KeyboardInterrupt:
                         proc.terminate()
                     output_thread.join()
-            else:
-                ErrorReturn = "Instance not found. Please try again."
-        else:
-            ErrorReturn = "Instance name cannot be empty. Please try again."
 
     elif input_choice == 3: 
         # Delete Instance
