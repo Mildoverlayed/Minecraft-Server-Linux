@@ -127,21 +127,21 @@ while True:
         for instance in ReturnListInstances():
             print(f" - {instance}")
         instance_name = input("Enter the instance name to start: ").strip()
-    
+
         if not is_valid_instance_name(instance_name):
             ErrorReturn = "Invalid instance name. Only letters, numbers, dash, and underscore are allowed."
         else:
             try:
                 base_dir = os.path.realpath(os.path.join(os.path.dirname(__file__), 'Instances'))
                 instance_path = os.path.realpath(os.path.join(base_dir, instance_name))
-    
+
                 if not instance_path.startswith(base_dir + os.sep):
                     ErrorReturn = "Path injection detected. Aborting."
                     break
             except Exception as e:
                 ErrorReturn = f"Path resolution error: {e}"
                 break
-            
+
             if not os.path.exists(instance_path):
                 ErrorReturn = "Instance not found. Please try again."
             else:
@@ -153,8 +153,9 @@ while True:
                         }
                         with open('config.json', 'w') as json_file:
                             json.dump(json_config, json_file, indent=4)
-    
+
                 # Handle EULA
+                """
                 eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
                     with open(eula_path, 'r') as f:
@@ -174,7 +175,7 @@ while True:
                     with open(eula_path, 'w') as f:
                         f.write('eula=true\n')
                     print("eula.txt created and set to true.")
-    
+                """
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
@@ -191,15 +192,15 @@ while True:
                         text=True,
                         bufsize=1
                     )
-    
+
                     def read_output(p):
                         for line in p.stdout:
                             print(line, end='')
-    
+
                     output_thread = threading.Thread(target=read_output, args=(proc,))
                     output_thread.daemon = True
                     output_thread.start()
-    
+
                     try:
                         while proc.poll() is None:
                             user_input = input()
