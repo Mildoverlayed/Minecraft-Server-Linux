@@ -153,22 +153,21 @@ while True:
                 if os.path.exists(eula_path):
                     with open(eula_path, 'r') as f:
                         lines = f.readlines()
-                    found = False
+                    updated = False
                     for i, line in enumerate(lines):
-                        if line.strip().startswith('eula='):
+                        if line.strip() == 'eula=false':
                             lines[i] = 'eula=true\n'
-                            found = True
-                    if not found:
-                        lines.append('eula=true\n')
-                    with open(eula_path, 'w') as f:
-                        f.writelines(lines)
-                    print("eula.txt has been set to true.")
-                    f.close()
+                            updated = True
+                    if updated:
+                        with open(eula_path, 'w') as f:
+                            f.writelines(lines)
+                        print("eula.txt updated to eula=true.")
+                    else:
+                        print("eula.txt already set to true. No changes made.")
                 else:
                     with open(eula_path, 'w') as f:
-                        f.write('eula=true/n')
+                        f.write('eula=true\n')
                     print("eula.txt created and set to true.")
-                    f.close()
                 print(f"Starting instance: {instance_name}")
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
