@@ -170,7 +170,6 @@ while True:
                             json.dump(json_config, json_file, indent=4)
 
                 # Handle EULA
-                os.system(f'chmod 777 {instance_path}/eula.txt')
                 eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
                     sleep(1)
