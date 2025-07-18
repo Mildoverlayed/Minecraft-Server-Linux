@@ -172,7 +172,6 @@ while True:
                 # Handle EULA
                 eula_path = os.path.join(instance_path, 'eula.txt')
                 if os.path.exists(eula_path):
-                    """
                     sleep(1)
                     with open(eula_path, "r") as file:
                         data = file.read()
@@ -181,7 +180,6 @@ while True:
                             with open(eula_path, "w") as file:
                                 file.write(data)
                                 sleep(1)
-                   """
                     os.system(f'echo "eula=true" > {eula_path}')
                 else:
                     sleep(1)
