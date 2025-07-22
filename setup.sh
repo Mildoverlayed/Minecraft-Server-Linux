@@ -31,6 +31,7 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install -y zulu21-ca-jre-headless
     sudo apt install python3 -y
     sudo apt install python3-pip -y
+    sudo apt install pip3-pytz -y
 
 elif [ "$OS" = "Ubuntu" ]; then
     jq '.DISTRO = "Ubuntu"' config.json > config.tmp && mv config.tmp config.json
@@ -57,6 +58,7 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt install openjdk-21-jre-headless -y
     sudo apt install python3 -y
     sudo apt install python3-pip -y
+    sudo apt install pip3-pytz -y
 
 else
     echo "Unsupported OS: $OS"
@@ -73,7 +75,7 @@ jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
 
 clear
 echo "Java installation complete."
-echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server (Y/n)"
+echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server or Custom "C" (Y/n/C)"
 read -r install_test_server
 if [[ "$install_test_server" = "Y" || "$install_test_server" = "y" ]]; then
     echo "Installing test server..."
@@ -81,6 +83,11 @@ if [[ "$install_test_server" = "Y" || "$install_test_server" = "y" ]]; then
     git clone https://github.com/Mildoverlayed/Example-Minecraft-Server.git
     echo "Test server installed in Instances/Example-Minecraft-Server"
     echo "To run the server, run StartServer.sh and follow the instructions."
+elif [[ "$install_test_server" = "C" || "$install_test_server" = "c" ]]; then
+    echo "Installing custom test server..."
+    echo "Please enter the Example-Minecraft-Server Extension:"
+    read -r custom_server_url
+    git clone "$custom_server_url" Instances/Custom-Minecraft-Server
 else
     echo "Skipping test server installation."
     echo "You can manually clone the repository later if needed."
