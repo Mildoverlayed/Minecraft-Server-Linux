@@ -2,7 +2,6 @@
 import os
 import json
 import subprocess   
-import sys
 import threading
 import glob
 from time import sleep
@@ -20,7 +19,7 @@ def ReturnListInstances():
     if os.path.exists(folder_path):
         directories = [entry.name for entry in os.scandir(folder_path) if entry.is_dir()]
         if len(directories) > 0:
-            return directories
+            return True, directories
         else:
             ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
             return False
@@ -135,7 +134,7 @@ while True:
     elif input_choice == 2:
         # Start Instance
         ClearScreen()
-        if ReturnListInstances() == False:
+        if not ReturnListInstances():
             ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
             break
         print("Available instances:")
@@ -191,7 +190,8 @@ while True:
                     sleep(1)
 
                 print(f"Starting instance: {instance_name}")
-                jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
+                os.chdir(instance_path)
+                jar_files = glob.glob("*.jar")
                 if not jar_files:
                     ErrorReturn = "No .jar file found in the instance directory."
                 else:
@@ -231,9 +231,10 @@ while True:
         # Delete Instance
         ClearScreen()
         if conferminput("Are you sure you want to delete an instance? (Y/n): "):
-            if ReturnListInstances() != False:
+            statement, directories = ReturnListInstances().split()
+            if statement:
                 print("Available instances:")
-                for instance in ReturnListInstances():
+                for instance in directories:
                     print(f" - {instance}")
                 instance_name = input("Enter the instance name to delete: ")
                 instance_path = os.path.join(os.path.dirname(__file__), 'Instances', instance_name)
