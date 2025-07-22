@@ -5,8 +5,6 @@ import subprocess
 import threading
 import glob
 from time import sleep
-from datetime import datetime
-import pytz
 
 
 # Functions
@@ -80,16 +78,6 @@ def is_valid_instance_name(name):
     # Only allow alphanumeric, dash, and underscore
     return name.isidentifier() or all(c.isalnum() or c in ('-', '_') for c in name)
 
-def get_eula_time():
-    # Set the Eastern Timezone
-    zone = pytz.timezone(ZONE)
-
-    # Get current UTC time and convert it to Eastern Time
-    now = datetime.now(pytz.utc).astimezone(zone)
-
-    # Format it to match the desired style
-    formatted = now.strftime('%a %b %d %H:%M:%S %Z %Y')
-    return formatted
 
 # Variables
 global ErrorReturn
@@ -183,13 +171,14 @@ while True:
                 else:
                     sleep(1)
                     with open(eula_path, 'w') as f:
-                        f.write(get_eula_time() + '\n')
                         f.write('eula=true\n')
                         f.close()
                     print("eula.txt created and set to eula=true.")
                     sleep(1)
 
                 print(f"Starting instance: {instance_name}")
+                print("When you are done, send /stop to stop the server. And once the screen stops moving press Ctrl + C to return to the menu.")
+                sleep(1)
                 jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
                     ErrorReturn = "No .jar file found in the instance directory."
