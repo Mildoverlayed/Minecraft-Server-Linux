@@ -58,7 +58,6 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt install openjdk-21-jre-headless -y
     sudo apt install python3 -y
     sudo apt install python3-pip -y
-    sudo apt install pip3-pytz -y
 
 else
     echo "Unsupported OS: $OS"
