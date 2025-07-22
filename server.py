@@ -190,13 +190,12 @@ while True:
                     sleep(1)
 
                 print(f"Starting instance: {instance_name}")
-                os.chdir(instance_path)
-                jar_files = glob.glob("*.jar")
+                jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
                 if not jar_files:
                     ErrorReturn = "No .jar file found in the instance directory."
                 else:
                     jar_path = jar_files[0]  # Use the first .jar file found
-                    cmd = f'java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
+                    cmd = f'cd {instance_path} && java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
                     proc = subprocess.Popen(
                         cmd,
                         shell=True,
