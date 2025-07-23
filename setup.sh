@@ -72,7 +72,28 @@ jq --arg timezone "$timezone" '.ZONE = $timezone' config.json > config.tmp && mv
 
 jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
 
-clear
+echo "Would you like to use ngrok for outside local network access? (Y/n)"
+read -r use_ngrok
+if [[ "$use_ngrok" = "Y" || "$use_ngrok" = "y" ]]; then
+    echo "Installing ngrok..."
+    curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+    echo "Ngrok installed. Please run 'ngrok authtoken YOUR_AUTH_TOKEN' to set up your account."
+    echo "You can get your auth token from https://dashboard.ngrok.com/get-started/your-authtoken"
+    echo "please enter your ngrok authtoken:"
+    read -r ngrok_token
+    ngrok config add-authtoken "$ngrok_token"
+    echo "Ngrok authtoken set successfully."
+    echo "You can now use ngrok to expose your Minecraft server to the internet."
+else
+    echo "Skipping ngrok installation."
+    echo "You can install it later if needed."
+fi
+
 echo "Java installation complete."
 echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server or Custom "C" (Y/n/C)"
 read -r install_test_server
