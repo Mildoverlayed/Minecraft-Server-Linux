@@ -138,7 +138,6 @@ while True:
         MINRAM = json_config['MINRAM']
         MAXRAM = json_config['MAXRAM']
         DISTRO = json_config['DISTRO']
-        ZONE = json_config['ZONE']
         NGROK = json_config['NGROK']
 
     if not SETUP:
