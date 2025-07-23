@@ -333,6 +333,8 @@ while True:
                 elif setting_choice == 4:
                     ClearScreen()
                     break
+            else:
+                break
             
     
     elif input_choice == 6: # Exit
