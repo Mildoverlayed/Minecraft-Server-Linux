@@ -78,6 +78,46 @@ def is_valid_instance_name(name):
     # Only allow alphanumeric, dash, and underscore
     return name.isidentifier() or all(c.isalnum() or c in ('-', '_') for c in name)
 
+def StartInstance(MINRAM, MAXRAM, instance_name, instance_path):
+    global ErrorReturn
+    print(f"Starting instance: {instance_name}")
+    print("When you are done, send /stop to stop the server. And once the screen stops moving press Ctrl + C to return to the menu.")
+    sleep(1)
+    jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
+    if not jar_files:
+        ErrorReturn = "No .jar file found in the instance directory."
+    else:
+        jar_path = jar_files[0]  # Use the first .jar file found
+        cmd = f'cd {instance_path} && java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
+        proc = subprocess.Popen(
+                        cmd,
+                        shell=True,
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.STDOUT,
+                        text=True,
+                        bufsize=1
+                    )
+
+        def read_output(p):
+            for line in p.stdout:
+                print(line, end='')
+
+        output_thread = threading.Thread(target=read_output, args=(proc,))
+        output_thread.daemon = True
+        output_thread.start()
+
+        try:
+            while proc.poll() is None:
+                user_input = input()
+                if user_input.strip().lower() == "exit":
+                    proc.terminate()
+                    break
+                proc.stdin.write(user_input + '\n')
+                proc.stdin.flush()
+        except KeyboardInterrupt:
+            proc.terminate()
+        output_thread.join()
 
 # Variables
 global ErrorReturn
@@ -87,6 +127,8 @@ input_choice = 0
 
 # Start of the script
 ClearScreen()
+
+
 while True:
 
     with open('config.json', 'r') as openfile:
@@ -122,6 +164,7 @@ while True:
     elif input_choice == 2:
         # Start Instance
         ClearScreen()
+        bool
         if not ReturnListInstances():
             ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
             break
@@ -176,44 +219,7 @@ while True:
                     print("eula.txt created and set to eula=true.")
                     sleep(1)
 
-                print(f"Starting instance: {instance_name}")
-                print("When you are done, send /stop to stop the server. And once the screen stops moving press Ctrl + C to return to the menu.")
-                sleep(1)
-                jar_files = glob.glob(os.path.join(instance_path, "*.jar"))
-                if not jar_files:
-                    ErrorReturn = "No .jar file found in the instance directory."
-                else:
-                    jar_path = jar_files[0]  # Use the first .jar file found
-                    cmd = f'cd {instance_path} && java -Xmx{MAXRAM}M -Xms{MINRAM}M -jar "{jar_path}" nogui'
-                    proc = subprocess.Popen(
-                        cmd,
-                        shell=True,
-                        stdin=subprocess.PIPE,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.STDOUT,
-                        text=True,
-                        bufsize=1
-                    )
-
-                    def read_output(p):
-                        for line in p.stdout:
-                            print(line, end='')
-
-                    output_thread = threading.Thread(target=read_output, args=(proc,))
-                    output_thread.daemon = True
-                    output_thread.start()
-
-                    try:
-                        while proc.poll() is None:
-                            user_input = input()
-                            if user_input.strip().lower() == "exit":
-                                proc.terminate()
-                                break
-                            proc.stdin.write(user_input + '\n')
-                            proc.stdin.flush()
-                    except KeyboardInterrupt:
-                        proc.terminate()
-                    output_thread.join()
+                StartInstance(MINRAM, MAXRAM, instance_name, instance_path)
 
     elif input_choice == 3: 
         # Delete Instance
