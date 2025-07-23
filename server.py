@@ -280,9 +280,10 @@ while True:
 
     elif input_choice == 4: # TODO: Configure Instance
         ClearScreen()
+        ErrorReturn = "This feature is not yet implemented. Please check back later."
         pass
 
-    elif input_choice == 5: # TODO: Global Settings
+    elif input_choice == 5: # Global Settings
         while True:
             print(f"""Current Config \n
                   Distro: {DISTRO} \n
@@ -342,7 +343,7 @@ while True:
         print("rebooting the server...")
         os.system('sudo reboot now')
 
-    elif input_choice == 7: # TODO: Shutdown Server
+    elif input_choice == 7: # Shutdown Server
         ClearScreen()
         if conferminput("Are you sure you want to shutdown the server? (Y/n): "):
             print("Shutting down the server...")
