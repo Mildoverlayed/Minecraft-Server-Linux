@@ -121,6 +121,24 @@ def StartInstance(MINRAM, MAXRAM, instance_name, instance_path):
             proc.terminate()
         output_thread.join()
 
+def SetUpNgrok():
+    global ErrorReturn, NGROK
+    if conferminput("Are you sure you want to setup Ngrok? (Y/n): "):
+        print("Setting up Ngrok...")
+        ngrok_token = input("Please enter your Ngrok authtoken: from https://dashboard.ngrok.com/get-started/your-authtoken \n >>>")
+        os.system(f'ngrok authtoken {ngrok_token}')
+        with open('Minecraft-Server-Linux-Submodules/config.json', 'r+') as json_file:
+            json_config = json.load(json_file)
+            json_config['NGROK'] = True
+            json_file.seek(0)
+            json.dump(json_config, json_file, indent=4)
+            json_file.truncate()
+        NGROK= True
+        ErrorReturn = "Ngrok setup complete. You can now use Ngrok to expose your server to the internet."
+    else:
+        ErrorReturn = "Ngrok setup cancelled."
+
+
 # Variables
 global ErrorReturn
 ErrorReturn = ""
@@ -267,7 +285,63 @@ while True:
         pass
 
     elif input_choice == 5: # TODO: Global Settings
-        # Global Settings
+        print("Current Config")
+        print(f"""Minimum RAM: {MINRAM}MB \n
+              Maximum RAM: {MAXRAM}MB \n
+              Distro: {DISTRO} \n
+              Ngrok Enabled: {NGROK}
+            """)
+        if conferminput("Would you like to change a setting? (Y/n): "):
+            ClearScreen()
+            print("1. Change Minimum RAM")
+            print("2. Change Maximum RAM")
+            print("3. Change Distro")
+            print("4. Toggle Ngrok")
+            print("5. Back to Main Menu")
+            while True:
+                try:
+                    setting_choice = int(input(">> "))
+                    break
+                except ValueError:
+                    ErrorReturn = "Invalid input. Please enter a number between 1 and 5."
+                    ClearScreen()
+                    StartScreen()
+                    continue
+
+            if setting_choice == 1:
+                new_min_ram = input("Enter new Minimum RAM in MB: ")
+                json_config['MINRAM'] = int(new_min_ram)
+                with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                    json.dump(json_config, json_file, indent=4)
+                ErrorReturn = f"Minimum RAM set to {new_min_ram}MB."
+
+            elif setting_choice == 2:
+                new_max_ram = input("Enter new Maximum RAM in MB: ")
+                json_config['MAXRAM'] = int(new_max_ram)
+                with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                    json.dump(json_config, json_file, indent=4)
+                ErrorReturn = f"Maximum RAM set to {new_max_ram}MB."
+
+            elif setting_choice == 3:
+                new_distro = input("Enter new Distro (Debian GNU/Linux or Ubuntu): ")
+                if new_distro in ["Debian GNU/Linux", "Ubuntu"]:
+                    json_config['DISTRO'] = new_distro
+                    with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                        json.dump(json_config, json_file, indent=4)
+                    ErrorReturn = f"Distro set to {new_distro}."
+                else:
+                    ErrorReturn = "Invalid Distro. Please try again."
+
+            elif setting_choice == 4:
+                if NGROK:
+                    NGROK = False
+                    json_config['NGROK'] = False
+                    with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                        json.dump(json_config, json_file, indent=4)
+                    ErrorReturn = "Ngrok disabled."
+                else:
+                    SetUpNgrok()
+                    ErrorReturn = "Ngrok enabled."
         pass
     
     elif input_choice == 6: # Exit
@@ -283,24 +357,7 @@ while True:
         else:
             ErrorReturn = "Shutdown cancelled."
 
-    elif input_choice == 8 and not NGROK: # Setup Ngrok
-        ClearScreen()
-        if conferminput("Are you sure you want to setup Ngrok? (Y/n): "):
-            print("Setting up Ngrok...")
-            ngrok_token = input("Please enter your Ngrok authtoken: from https://dashboard.ngrok.com/get-started/your-authtoken \n >>>")
-            os.system(f'ngrok authtoken {ngrok_token}')
-            with open('Minecraft-Server-Linux-Submodules/config.json', 'r+') as json_file:
-                json_config = json.load(json_file)
-                json_config['NGROK'] = True
-                json_file.seek(0)
-                json.dump(json_config, json_file, indent=4)
-                json_file.truncate()
-            NGROK= True
-            ErrorReturn = "Ngrok setup complete. You can now use Ngrok to expose your server to the internet."
-        else:
-            ErrorReturn = "Ngrok setup cancelled."
-    else :
-        print("Invalid choice. Please try again.")
+
 
 
 
