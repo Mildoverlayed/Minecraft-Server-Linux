@@ -58,6 +58,8 @@ def StartScreen():
     print("5. Global Settings")
     print("6. Reboot Server")
     print("7. Shutdown Server")
+    if not NGROK:
+        print("8. Setup Ngrok")
     print("\n \n")
     print(ErrorReturn)
 
@@ -152,7 +154,10 @@ while True:
             input_choice = int(input(">> "))
             break
         except ValueError:
-            ErrorReturn = "Invalid input. Please enter a number between 1 and 5."
+            if not NGROK:
+                ErrorReturn = "Invalid input. Please enter a number between 1 and 8."   
+            else:   
+                ErrorReturn = "Invalid input. Please enter a number between 1 and 7."
             ClearScreen()
             StartScreen()
             continue
@@ -219,12 +224,12 @@ while True:
                         f.close()
                     print("eula.txt created and set to eula=true.")
                     sleep(1)
-
-                if conferminput("Would you like to use Ngrok to expose your server to the internet? (Y/n): "):
-                    print("Starting Ngrok...")
-                    os.system('ngrok tcp 25565 ')
-                    sleep(1)
-                    print("Ngrok started. You can find the public address in the terminal output.")
+                if NGROK:
+                    if conferminput("Would you like to use Ngrok to expose your server to the internet? (Y/n): "):
+                        print("Starting Ngrok...")
+                        os.system('ngrok tcp 25565 ')
+                        sleep(1)
+                        print("Ngrok started. You can find the public address in the terminal output.")
 
                 StartInstance(MINRAM, MAXRAM, instance_name, instance_path)
 
@@ -278,6 +283,21 @@ while True:
         else:
             ErrorReturn = "Shutdown cancelled."
 
+    elif input_choice == 8 and not NGROK: # Setup Ngrok
+        ClearScreen()
+        if conferminput("Are you sure you want to setup Ngrok? (Y/n): "):
+            print("Setting up Ngrok...")
+            os.system('ngrok authtoken YOUR_NGROK_AUTH_TOKEN')
+            with open('Minecraft-Server-Linux-Submodules/config.json', 'r+') as json_file:
+                json_config = json.load(json_file)
+                json_config['NGROK'] = True
+                json_file.seek(0)
+                json.dump(json_config, json_file, indent=4)
+                json_file.truncate()
+            NGROK= True
+            ErrorReturn = "Ngrok setup complete. You can now use Ngrok to expose your server to the internet."
+        else:
+            ErrorReturn = "Ngrok setup cancelled."
     else :
         print("Invalid choice. Please try again.")
 
