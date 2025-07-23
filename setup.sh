@@ -12,7 +12,7 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install ./zulu-repo_1.0.0-2_all.deb
     sudo apt-get update
     sudo apt install tmux -y
-    curl https://github.com/cjbassi/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb 
+    curl https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb 
     sudo dpkg -i gotop_v4.2.0_linux_amd64.deb
     sudo apt-get install jq -y
     sudo apt-get install -y zulu8-ca-jre-headless
