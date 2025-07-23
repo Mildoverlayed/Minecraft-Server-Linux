@@ -58,8 +58,6 @@ def StartScreen():
     print("5. Global Settings")
     print("6. Reboot Server")
     print("7. Shutdown Server")
-    if not NGROK:
-        print("8. Setup Ngrok")
     print("\n \n")
     print(ErrorReturn)
 
