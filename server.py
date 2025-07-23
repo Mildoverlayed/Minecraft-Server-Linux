@@ -139,6 +139,7 @@ while True:
         MAXRAM = json_config['MAXRAM']
         DISTRO = json_config['DISTRO']
         NGROK = json_config['NGROK']
+        openfile.close()
 
     if not SETUP:
         print("Please run the setup first.")
