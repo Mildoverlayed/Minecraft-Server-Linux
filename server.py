@@ -139,6 +139,7 @@ while True:
         MAXRAM = json_config['MAXRAM']
         DISTRO = json_config['DISTRO']
         ZONE = json_config['ZONE']
+        NGROK = json_config['NGROK']
 
     if not SETUP:
         print("Please run the setup first.")
@@ -218,6 +219,12 @@ while True:
                         f.close()
                     print("eula.txt created and set to eula=true.")
                     sleep(1)
+
+                if conferminput("Would you like to use Ngrok to expose your server to the internet? (Y/n): "):
+                    print("Starting Ngrok...")
+                    os.system('ngrok tcp 25565 ')
+                    sleep(1)
+                    print("Ngrok started. You can find the public address in the terminal output.")
 
                 StartInstance(MINRAM, MAXRAM, instance_name, instance_path)
 

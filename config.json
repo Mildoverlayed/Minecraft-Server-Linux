@@ -3,5 +3,6 @@
     "ZONE": "",
     "SETUP": false,
     "MINRAM": "1024",
-    "MAXRAM": "2048"
+    "MAXRAM": "2048",
+    "NGROK": false
 }

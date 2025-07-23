@@ -89,6 +89,8 @@ if [[ "$use_ngrok" = "Y" || "$use_ngrok" = "y" ]]; then
     ngrok config add-authtoken "$ngrok_token"
     echo "Ngrok authtoken set successfully."
     echo "You can now use ngrok to expose your Minecraft server to the internet."
+    jq '.NGROK = true' config.json > config.tmp && mv config.tmp config.json
+
 else
     echo "Skipping ngrok installation."
     echo "You can install it later if needed."
