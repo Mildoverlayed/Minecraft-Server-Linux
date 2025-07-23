@@ -287,7 +287,8 @@ while True:
         ClearScreen()
         if conferminput("Are you sure you want to setup Ngrok? (Y/n): "):
             print("Setting up Ngrok...")
-            os.system('ngrok authtoken YOUR_NGROK_AUTH_TOKEN')
+            ngrok_token = input("Please enter your Ngrok authtoken: from https://dashboard.ngrok.com/get-started/your-authtoken \n >>>")
+            os.system(f'ngrok authtoken {ngrok_token}')
             with open('Minecraft-Server-Linux-Submodules/config.json', 'r+') as json_file:
                 json_config = json.load(json_file)
                 json_config['NGROK'] = True
