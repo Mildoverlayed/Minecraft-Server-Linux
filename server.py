@@ -294,9 +294,8 @@ while True:
                 ClearScreen()
                 print("1. Change Minimum RAM")
                 print("2. Change Maximum RAM")
-                print("3. Change Distro")
-                print("4. Toggle Ngrok")
-                print("5. Back to Main Menu")
+                print("3. Toggle Ngrok")
+                print("4. Back to Main Menu")
                 while True:
                     try:
                         setting_choice = int(input(">> "))
@@ -322,16 +321,6 @@ while True:
                     ErrorReturn = f"Maximum RAM set to {new_max_ram}MB."
 
                 elif setting_choice == 3:
-                    new_distro = input("Enter new Distro (Debian GNU/Linux or Ubuntu): ")
-                    if new_distro in ["Debian GNU/Linux", "Ubuntu"]:
-                        json_config['DISTRO'] = new_distro
-                        with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
-                            json.dump(json_config, json_file, indent=4)
-                        ErrorReturn = f"Distro set to {new_distro}."
-                    else:
-                        ErrorReturn = "Invalid Distro. Please try again."
-
-                elif setting_choice == 4:
                     if NGROK:
                         NGROK = False
                         json_config['NGROK'] = False
@@ -341,7 +330,7 @@ while True:
                     else:
                         SetUpNgrok()
                         ErrorReturn = "Ngrok enabled."
-                elif setting_choice == 5:
+                elif setting_choice == 4:
                     ClearScreen()
                     break
             
