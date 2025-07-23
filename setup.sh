@@ -12,16 +12,8 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install ./zulu-repo_1.0.0-2_all.deb
     sudo apt-get update
     sudo apt install tmux -y
-    # Install gotop (latest .deb from v4.2.0 release)
-    GOTOP_URL=$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases/tags/v4.2.0 \
-      | grep "browser_download_url" \
-      | grep "amd64.deb" \
-      | cut -d '"' -f 4 | head -n 1)
-
-    if [ -n "$GOTOP_URL" ]; then
-        wget "$GOTOP_URL" -O gotop.deb
-        sudo dpkg -i gotop.deb
-        rm gotop.deb
+    wget https://github.com/cjbassi/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb
+    sudo dpkg -i gotop_v4.2.0_linux_amd64.deb
     else
         echo "Could not find gotop .deb package for v4.2.0"
     fi
@@ -38,21 +30,8 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt-get install jq -y
     sudo apt install tmux -y
-
-    # Install gotop (latest .deb from v4.2.0 release)
-    GOTOP_URL=$(curl -s https://api.github.com/repos/xxxserxxx/gotop/releases/tags/v4.2.0 \
-      | grep "browser_download_url" \
-      | grep "amd64.deb" \
-      | cut -d '"' -f 4 | head -n 1)
-
-    if [ -n "$GOTOP_URL" ]; then
-        wget "$GOTOP_URL" -O gotop.deb
-        sudo dpkg -i gotop.deb
-        rm gotop.deb
-    else
-        echo "Could not find gotop .deb package for v4.2.0"
-    fi
-
+    wget https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb
+    sudo dpkg -i gotop_v4.2.0_linux_amd64.deb
     sudo apt install openjdk-8-jre-headless -y
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
@@ -65,12 +44,6 @@ else
     exit 1
 fi
 
-echo "we now need to set the timezone for the server, please enter your timezone (e.g. Europe/London, America/New_York):"
-echo "You can find your timezone at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones make sure to use the TZ identifier."
-read -r timezone
-jq --arg timezone "$timezone" '.ZONE = $timezone' config.json > config.tmp && mv config.tmp config.json
-
-jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
 
 echo "Would you like to use ngrok for outside local network access? (Y/n)"
 read -r use_ngrok
