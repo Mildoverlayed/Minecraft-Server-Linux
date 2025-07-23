@@ -1,17 +1,15 @@
+## Welcome
 Minecraft Server hoster for Ubuntu and Debian server and regualar Distro.
 I know this has already been done and is most likely better but I wanted my take.
 And this can do modded while automaticly changing and installing the needed java version since some better mods are made for older versions
  
-For an example Server Go to https://github.com/Mildoverlayed/Example-Minecraft-Server.git or install during setup process
-
-## INSTALL
-if on windows open cmd and type wsl --install debian
-then download and extract and run sudo bash setup.sh and follow instructions
-
-if your not on windows its the exact same thing but without the wsl install + you probbly know what to do if you got this far
+For an example Servers Go to https://github.com/Mildoverlayed/Example-Minecraft-Server.git or install during setup process but note that you have to move the type of server into the instances folder and can not keep it how it downloads that includes when you use the setup scrip.
 
 
 
+### Known Issues
+* when you update this server helper all your files get wiped 
+* Raspberry PI has issues with the python script with permisions A known workaround is just to enter sudo python server.py
 
 
 Java 8: Required for Minecraft versions 1.12 through 1.176.

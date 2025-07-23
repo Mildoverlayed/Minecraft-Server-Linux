@@ -88,11 +88,12 @@ elif [[ "$install_test_server" = "C" || "$install_test_server" = "c" ]]; then
     echo "Please enter the Example-Minecraft-Server Extension:"
     read -r custom_server_url
     git clone "$custom_server_url" Instances/Custom-Minecraft-Server
+    echo "Please move the server version you want to use into the Instances folder."
 else
     echo "Skipping test server installation."
     echo "You can manually clone the repository later if needed."
-    echo "Thank you for using My Minecraft Server Manager!"
     exit 1
 fi
+    echo "Thank you for using My Minecraft Server Manager!"
 
 exit 0
