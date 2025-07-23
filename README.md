@@ -1,8 +1,14 @@
+# WHEN YOU INSTALL YOU MUST USE THE --recursive
+if you have already installled you can fix this by running 
+"""
+git submodule update --init
+"""
+
 ## Welcome
 Minecraft Server hoster for Ubuntu and Debian server and regualar Distro.
 I know this has already been done and is most likely better but I wanted my take.
 And this can do modded while automaticly changing and installing the needed java version since some better mods are made for older versions
- 
+
 For an example Servers Go to https://github.com/Mildoverlayed/Example-Minecraft-Server.git or install during setup process but note that you have to move the type of server into the instances folder and can not keep it how it downloads that includes when you use the setup scrip.
 
 If you chose to use Ngrok please note that it is free but in order to make sure your not a bot and that you do not have malishies intendt    it does require you to add a credit card to your account it will not be charged however you can only get a certin amount of play time from outside the network to maximise this time if you are playing on the same network as your server just use the server host local ip with port 25565 example 192.168.x.x:25565
