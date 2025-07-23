@@ -14,9 +14,6 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt install tmux -y
     wget https://github.com/cjbassi/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb
     sudo dpkg -i gotop_v4.2.0_linux_amd64.deb
-    else
-        echo "Could not find gotop .deb package for v4.2.0"
-    fi
     sudo apt-get install jq -y
     sudo apt-get install -y zulu8-ca-jre-headless
     sudo apt-get install -y zulu17-ca-jre-headless
@@ -39,7 +36,7 @@ elif [ "$OS" = "Ubuntu" ]; then
 
 else
     echo "Unsupported OS: $OS"
-    echo "Please use Debian or Ubuntu." 
+    echo "Please use Debian or Ubuntu. Ubuntu is recommended." 
     exit 1
 fi
 
