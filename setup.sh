@@ -40,6 +40,10 @@ else
     exit 1
 fi
 
+chmod 777 config.json
+chmod 777 server.py
+chmod 777 Instances
+
 
 echo "Would you like to use ngrok for outside local network access? (Y/n)"
 read -r use_ngrok
