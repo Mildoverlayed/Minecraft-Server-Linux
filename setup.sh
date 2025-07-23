@@ -1,3 +1,4 @@
+cd Minecraft-Server-Linux-Submodules
 OS=$(sed -n 's/^NAME=//p' /etc/os-release | sed 's/^"\(.*\)"$/\1/')
 echo "Detected OS: $OS"
 if [ "$OS" = "Debian GNU/Linux" ]; then
