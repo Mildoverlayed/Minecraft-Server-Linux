@@ -65,6 +65,8 @@ else
     echo "You can install it later if needed."
 fi
 
+jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
+
 echo "Java installation complete."
 echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server or Custom "C" (Y/n/C)"
 read -r install_test_server
