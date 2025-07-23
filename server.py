@@ -13,7 +13,7 @@ def ReturnListInstances():
     """
     List all Minecraft server instances.
     """
-    folder_path = os.path.join(os.path.dirname(__file__), 'Instances')
+    folder_path = os.path.join(os.path.dirname(__file__), 'Minecraft-Server-Linux-Submodules/Instances')
     if os.path.exists(folder_path):
         directories = [entry.name for entry in os.scandir(folder_path) if entry.is_dir()]
         if len(directories) > 0:
@@ -131,7 +131,7 @@ ClearScreen()
 
 while True:
 
-    with open('config.json', 'r') as openfile:
+    with open('Minecraft-Server-Linux-Submodules/config.json', 'r') as openfile:
 
         json_config = json.load(openfile)
         SETUP = json_config['SETUP']
@@ -178,7 +178,7 @@ while True:
             ErrorReturn = "Invalid instance name. Only letters, numbers, dash, and underscore are allowed."
         else:
             try:
-                base_dir = os.path.realpath(os.path.join(os.path.dirname(__file__), 'Instances'))
+                base_dir = os.path.realpath(os.path.join(os.path.dirname(__file__), 'Minecraft-Server-Linux-Submodules/Instances'))
                 instance_path = os.path.realpath(os.path.join(base_dir, instance_name))
 
                 if not instance_path.startswith(base_dir + os.sep):
@@ -197,7 +197,7 @@ while True:
                         json_config[instance_name] = {
                             "version": minecraft_version
                         }
-                        with open('config.json', 'w') as json_file:
+                        with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
                             json.dump(json_config, json_file, indent=4)
 
                 # Handle EULA

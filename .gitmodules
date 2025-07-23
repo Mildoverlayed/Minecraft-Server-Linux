@@ -1,0 +1,3 @@
+[submodule "Minecraft-Server-Linux-Submodules"]
+	path = Minecraft-Server-Linux-Submodules
+	url = https://github.com/Mildoverlayed/Minecraft-Server-Linux-Submodules
