@@ -12,8 +12,8 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install ./zulu-repo_1.0.0-2_all.deb
     sudo apt-get update
     sudo apt install tmux -y
-    curl -O https://github.com/cjbassi/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb
-    sudo dpkg -i gotop_v4.2.0_linux_amd64.deb
+    curl -O https://github.com/cjbassi/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb gotop
+    sudo dpkg -i gotop
     sudo apt-get install jq -y
     sudo apt-get install -y zulu8-ca-jre-headless
     sudo apt-get install -y zulu17-ca-jre-headless
@@ -26,8 +26,8 @@ elif [ "$OS" = "Ubuntu" ]; then
     sudo apt update && sudo apt install -y
     sudo apt-get install jq -y
     sudo apt install tmux -y
-    curl -O https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb
-    sudo dpkg -i gotop_v4.2.0_linux_amd64.deb
+    curl -O https://github.com/xxxserxxx/gotop/releases/download/v4.2.0/gotop_v4.2.0_linux_amd64.deb gotop
+    sudo dpkg -i gotop
     sudo apt install openjdk-8-jre-headless -y
     sudo apt install openjdk-17-jre-headless -y
     sudo apt install openjdk-21-jre-headless -y
