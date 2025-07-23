@@ -285,64 +285,68 @@ while True:
         pass
 
     elif input_choice == 5: # TODO: Global Settings
-        print("Current Config")
-        print(f"""Minimum RAM: {MINRAM}MB \n
-              Maximum RAM: {MAXRAM}MB \n
-              Distro: {DISTRO} \n
-              Ngrok Enabled: {NGROK}
-            """)
-        if conferminput("Would you like to change a setting? (Y/n): "):
-            ClearScreen()
-            print("1. Change Minimum RAM")
-            print("2. Change Maximum RAM")
-            print("3. Change Distro")
-            print("4. Toggle Ngrok")
-            print("5. Back to Main Menu")
-            while True:
-                try:
-                    setting_choice = int(input(">> "))
-                    break
-                except ValueError:
-                    ErrorReturn = "Invalid input. Please enter a number between 1 and 5."
+        while True:
+            print("Current Config")
+            print(f"""Minimum RAM: {MINRAM}MB \n
+                  Maximum RAM: {MAXRAM}MB \n
+                  Distro: {DISTRO} \n
+                  Ngrok Enabled: {NGROK}
+                """)
+            if conferminput("Would you like to change a setting? (Y/n): "):
+                ClearScreen()
+                print("1. Change Minimum RAM")
+                print("2. Change Maximum RAM")
+                print("3. Change Distro")
+                print("4. Toggle Ngrok")
+                print("5. Back to Main Menu")
+                while True:
+                    try:
+                        setting_choice = int(input(">> "))
+                        break
+                    except ValueError:
+                        ErrorReturn = "Invalid input. Please enter a number between 1 and 5."
+                        ClearScreen()
+                        StartScreen()
+                        continue
+
+                if setting_choice == 1:
+                    new_min_ram = input("Enter new Minimum RAM in MB: ")
+                    json_config['MINRAM'] = int(new_min_ram)
+                    with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                        json.dump(json_config, json_file, indent=4)
+                    ErrorReturn = f"Minimum RAM set to {new_min_ram}MB."
+
+                elif setting_choice == 2:
+                    new_max_ram = input("Enter new Maximum RAM in MB: ")
+                    json_config['MAXRAM'] = int(new_max_ram)
+                    with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                        json.dump(json_config, json_file, indent=4)
+                    ErrorReturn = f"Maximum RAM set to {new_max_ram}MB."
+
+                elif setting_choice == 3:
+                    new_distro = input("Enter new Distro (Debian GNU/Linux or Ubuntu): ")
+                    if new_distro in ["Debian GNU/Linux", "Ubuntu"]:
+                        json_config['DISTRO'] = new_distro
+                        with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                            json.dump(json_config, json_file, indent=4)
+                        ErrorReturn = f"Distro set to {new_distro}."
+                    else:
+                        ErrorReturn = "Invalid Distro. Please try again."
+
+                elif setting_choice == 4:
+                    if NGROK:
+                        NGROK = False
+                        json_config['NGROK'] = False
+                        with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
+                            json.dump(json_config, json_file, indent=4)
+                        ErrorReturn = "Ngrok disabled."
+                    else:
+                        SetUpNgrok()
+                        ErrorReturn = "Ngrok enabled."
+                elif setting_choice == 5:
                     ClearScreen()
-                    StartScreen()
-                    continue
-
-            if setting_choice == 1:
-                new_min_ram = input("Enter new Minimum RAM in MB: ")
-                json_config['MINRAM'] = int(new_min_ram)
-                with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
-                    json.dump(json_config, json_file, indent=4)
-                ErrorReturn = f"Minimum RAM set to {new_min_ram}MB."
-
-            elif setting_choice == 2:
-                new_max_ram = input("Enter new Maximum RAM in MB: ")
-                json_config['MAXRAM'] = int(new_max_ram)
-                with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
-                    json.dump(json_config, json_file, indent=4)
-                ErrorReturn = f"Maximum RAM set to {new_max_ram}MB."
-
-            elif setting_choice == 3:
-                new_distro = input("Enter new Distro (Debian GNU/Linux or Ubuntu): ")
-                if new_distro in ["Debian GNU/Linux", "Ubuntu"]:
-                    json_config['DISTRO'] = new_distro
-                    with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
-                        json.dump(json_config, json_file, indent=4)
-                    ErrorReturn = f"Distro set to {new_distro}."
-                else:
-                    ErrorReturn = "Invalid Distro. Please try again."
-
-            elif setting_choice == 4:
-                if NGROK:
-                    NGROK = False
-                    json_config['NGROK'] = False
-                    with open('Minecraft-Server-Linux-Submodules/config.json', 'w') as json_file:
-                        json.dump(json_config, json_file, indent=4)
-                    ErrorReturn = "Ngrok disabled."
-                else:
-                    SetUpNgrok()
-                    ErrorReturn = "Ngrok enabled."
-        pass
+                    break
+            
     
     elif input_choice == 6: # Exit
         ClearScreen()
