@@ -285,9 +285,9 @@ while True:
     elif input_choice == 5: # TODO: Global Settings
         while True:
             print(f"""Current Config \n
+                  Distro: {DISTRO} \n
                   Minimum RAM: {MINRAM}MB \n
                   Maximum RAM: {MAXRAM}MB \n
-                  Distro: {DISTRO} \n
                   Ngrok Enabled: {NGROK}
                 """)
             if conferminput("Would you like to change a setting? (Y/n): "):
