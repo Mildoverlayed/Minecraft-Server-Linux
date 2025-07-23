@@ -39,11 +39,14 @@ else
     echo "Please use Debian or Ubuntu. Ubuntu is recommended." 
     exit 1
 fi
+echo "package installation complete."
 
+echo "seting file permissions"
 chmod 777 config.json
 chmod 777 server.py
 chmod 777 Instances
 
+echo "\n\n\n"
 
 echo "Would you like to use ngrok for outside local network access? (Y/n)"
 read -r use_ngrok
@@ -71,7 +74,7 @@ fi
 
 jq '.SETUP = true' config.json > config.tmp && mv config.tmp config.json
 
-echo "Java installation complete."
+echo "\n\n\n"
 echo "would you like to install a test server it is a vanilla server with no mods See more at https://github.com/Mildoverlayed/Example-Minecraft-Server or Custom "C" (Y/n/C)"
 read -r install_test_server
 if [[ "$install_test_server" = "Y" || "$install_test_server" = "y" ]]; then
