@@ -284,8 +284,8 @@ while True:
 
     elif input_choice == 5: # TODO: Global Settings
         while True:
-            print("Current Config")
-            print(f"""Minimum RAM: {MINRAM}MB \n
+            print(f"""Current Config \n
+                  Minimum RAM: {MINRAM}MB \n
                   Maximum RAM: {MAXRAM}MB \n
                   Distro: {DISTRO} \n
                   Ngrok Enabled: {NGROK}
