@@ -23,7 +23,6 @@ if [ "$OS" = "Debian GNU/Linux" ]; then
     sudo apt-get install -y zulu21-ca-jre-headless
     sudo apt install python3 -y
     sudo apt install python3-pip -y
-    sudo apt install pip3-pytz -y
 
 elif [ "$OS" = "Ubuntu" ]; then
     jq '.DISTRO = "Ubuntu"' config.json > config.tmp && mv config.tmp config.json
