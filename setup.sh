@@ -1,3 +1,6 @@
+chmod +x StartServer.sh
+path=pwd
+export PATH=$PATH:$path
 cd Minecraft-Server-Linux-Submodules
 OS=$(sed -n 's/^NAME=//p' /etc/os-release | sed 's/^"\(.*\)"$/\1/')
 echo "Detected OS: $OS"
