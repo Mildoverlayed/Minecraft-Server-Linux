@@ -186,12 +186,12 @@ while True:
     elif input_choice == 2:
         # Start Instance
         ClearScreen()
-        bool
-        if not ReturnListInstances():
+        bol,dira = ReturnListInstances()  
+        if not bol:
             ErrorReturn = "No instances found. Please create an instance folder in the Instances directory."
             break
         print("Available instances:")
-        for instance in ReturnListInstances():
+        for instance in dira:
             print(f" - {instance}")
         instance_name = input("Enter the instance name to start: ").strip()
 
