@@ -6,7 +6,7 @@ SESSION="minecraft-server"
 tmux new-session -d -s $SESSION
 
 # Run the Python script in the left pane (pane 0)
-tmux send-keys -t $SESSION 'python3 server.py' C-m
+tmux send-keys -t $SESSION 'sudo python3 server.py' C-m
 
 # Split the window vertically (right pane)
 tmux split-window -h -t $SESSION
